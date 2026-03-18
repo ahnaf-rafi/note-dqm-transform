@@ -1,0 +1,139 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+%%%%%%%%%%%
+% Margins %
+%%%%%%%%%%%
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+
+%%%%%%%%%%%%%%%%
+% Line Spacing %
+%%%%%%%%%%%%%%%%
+\usepackage{setspace}
+\doublespacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% References and links in text %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[bookmarks=true, hidelinks]{hyperref}
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{naturalnames}{hyperref}
+\hypersetup{
+pdfauthor={Ahnaf Rafi},
+colorlinks=true,
+linkcolor=blue,
+urlcolor=blue,
+citecolor=blue
+}
+
+%%%%%%%%%%%%%%%%%
+% Control lists %
+%%%%%%%%%%%%%%%%%
+\usepackage{enumitem}
+
+%%%%%%%%%%
+% Tables %
+%%%%%%%%%%
+% \usepackage{float}
+% \usepackage{booktabs}
+% \usepackage{multirow}
+
+%%%%%%%%
+% Math %
+%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{mathrsfs}
+
+% Algorithms
+% \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+
+% Must be loaded after amsmath, but before new theorem defs.
+\usepackage[nameinlink]{cleveref}
+
+\pdfstringdefDisableCommands{%
+  \let\Cref\autoref
+  \let\cref\autoref
+}
+
+% Extra operators and symbols
+% \DeclareMathOperator*{\argmax}{argmax}
+% \DeclareMathOperator*{\argmin}{argmin}
+% \DeclareMathOperator*{\Leb}{Leb}
+
+% Independence in Probability Theory and Statistics.
+\newcommand{\indep}{\mathrel{\perp \mspace{-11mu} \perp}}
+
+% Probability operators: uncomment as needed
+% \def\Pr{\mathrm{Pr}}
+% \def\E{\mathrm{E}}
+% \def\Var{\mathrm{Var}}
+% \def\Cov{\mathrm{Cov}}
+% \def\Supp{\mathrm{support}}
+% \def\pto{\overset{\mathrm{p}}{\to}}
+% \def\dto{\rightsquigarrow}
+% \def\N{\mathrm{N}} % Normal distribution
+% \def\Bern{\mathrm{Bernoulli}}
+% \def\Unif{\mathrm{Uniform}}
+
+% \def\hatPr{\widehat{\mathrm{Pr}}}
+% \def\hatE{\widehat{\mathrm{E}}}
+% \def\hatVar{\widehat{\mathrm{Var}}}
+% \def\hatCov{\widehat{\mathrm{Cov}}}
+
+
+% Display breaks in aligned equations
+\allowdisplaybreaks
+
+% \numberwithin{equation}{section}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+% \newtheorem{assumption}{Assumption}[section]
+% \crefname{assumption}{assumption}{assumptions}
+% \newtheorem{asm}{Assumption}
+% \crefname{asm}{assumption}{assumptions}
+% \newtheorem{remark}{Remark}[section]
+% \newtheorem{example}{Example}[section]
+% \newtheorem{notation}{Notation}[section]
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+% \crefname{lemma}{lemma}{lemmas}
+% \newtheorem{corollary}{Corollary}
+
+%%%%%%%%%%%%%%%%
+% Bibliography %
+%%%%%%%%%%%%%%%%
+\usepackage[
+authordate,
+sorting=nyt,
+backend=biber,
+maxcitenames=3,
+natbib,
+doi=false,
+isbn=false,
+url=false,
+eprint=false
+]{biblatex-chicago}
+
+\addbibresource{note-dqm-transform.bib}
+
+\title{A Note on Preservation of Differentiability in Quadratic Mean Under
+Measurable Transformations}
+\author{Ahnaf Rafi}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\printbibliography
+
+\end{document}
