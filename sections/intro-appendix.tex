@@ -1,0 +1,162 @@
+%! TEX root = ../note-dqm-transform.tex
+
+\section{Proofs of results in \texorpdfstring{\Cref{sec--intro}}{Section
+\ref{sec--intro}}}
+% \label{sec--prf--intro}
+
+\subsection{Proof of claim in
+\texorpdfstring{\Cref{eg--non-sigma-finite-pushforward}}{Example
+\ref{eg--non-sigma-finite-pushforward}}}
+\label{sec--prf--eg--non-sigma-finite-pushforward}
+
+Take any set \(E\) such that \(\nu (E) > 0\).
+\(E\) must contain a subset of the form \(A \times \{a\}\) where \(a \in \{0,
+1\}\) and \(A\) is a set of positive Lebesgue measure, since otherwise
+\(\nu (E) = 0\).
+If \(a = 1\), then \(T^{- 1} (A \times \{1\}) = \cup_{y \in A} (- \infty, y]
+\times \{y\}\).
+Define
+\begin{equation*}
+  g (x, y) = \mathbf{1}_{A} (y) \mathbf{1}_{(- \infty, y]} (x).
+\end{equation*}
+Then \(g \equiv 1_{T^{- 1} (A \times \{1\})}\).
+By the Fubini-Tonelli Theorem,
+\begin{equation*}
+  \nu (A \times \{1\}) = \mu (T^{- 1} (A \times \{1\})) = \mu \left[ g \right] =
+  \int \mathbf{1}_{A} (y) \cdot \left( \int \mathbf{1}_{(- \infty, y]} (x) \;
+  \mathrm{d} x \right) \; \mathrm{d} y = \infty,
+\end{equation*}
+since \(\int \mathbf{1}_{(- \infty, y]} (x) \; \mathrm{d} x = \infty\) for every
+\(y \in A\) and \(A\) has positive Lebesgue measure.
+By essentially the same argument, the same holds for \(a = 0\), i.e.
+\(\nu (A \times \{0\}) = \infty\) by \(\int \mathbf{1}_{(y, \infty)} (x) \;
+\mathrm{d} x = \infty\).
+Since \(E \supseteq A \times \{a\}\), \(\nu (E) = \infty\).
+Therefore, there cannot be a sequence of measurable sets \(\left\{ E_{n}
+\right\}\) such that \(\mathbb{R}^{2} = \cup_{n \in \mathbb{N}} E_{n}\) and
+\(\nu \left( E_{n} \right) \in (0, \infty)\) for each \(n
+\in \mathbb{N}\).
+\qed
+
+\subsection{Proof
+\texorpdfstring{\Cref{thm--sigma-finite-meas-abs-bicont-prob-meas}}{Theorem
+\ref{thm--sigma-finite-meas-abs-bicont-prob-meas}}}
+\label{sec--prf--thm--sigma-finite-meas-abs-bicont-prob-meas}
+
+Since \(\mu\) is \(\sigma\)-finite, there is a countable
+\(\mathcal{B}\)-measurable partition of \(\mathbf{X}\), \(\left\{ E_{n}
+\right\}_{n \in \mathcal{N}}\) with \(\mathcal{N} \subseteq \mathbb{N}\), such
+that \(\mu \left( E_{n} \right) < \infty\) for each \(n \in \mathcal{N}\).
+Since \(\mu\) is positive, we can further restrict the selection to ensure that
+\(\mu \left( E_{n} \right) > 0\) for each \(n \in \mathcal{N}\).
+
+\textbf{Case 1:} \(\mathcal{N}\) is finite.
+Then \(\mu\) is a finite measure and we can define \(\lambda (A) := \mu (A) /
+\mu (\mathbf{X})\) for every \(A \in \mathcal{B}\), which is clearly a
+probability measure satisfying \(\lambda \ll \mu\).
+By \(\mu (A) = \mu (\mathbf{X}) \cdot \lambda (A)\) and \(\mu (\mathbf{X}) \in
+(0, \infty)\), \(\lambda (A) = 0\) implies \(\mu (A) = 0\), and hence \(\mu \ll
+\lambda\).
+
+\textbf{Case 2:} \(\mathcal{N}\) is infinite.
+Without loss of generality, let \(\mathcal{N} = \mathbb{N}\).
+Define
+\begin{equation*}
+  \lambda (A) := \sum_{n = 1}^{\infty} 2^{- n} \frac{\mu \left( E_{n} \cap A
+  \right)}{\mu \left( E_{n} \right)}.
+\end{equation*}
+Clearly, \(\lambda\) is non-negative, \(\sigma\)-additive and \(\lambda (X) =
+1\).
+If \(\mu (A) = 0\), then \(\mu \left( E_{n} \cap A \right) = 0\) for every \(n
+\in \mathbb{N}\) so that \(\lambda (A) = 0\) and hence, \(\lambda \ll \mu\).
+If \(\lambda (A) = 0\), then \(\mu \left( E_{n} \cap A \right) = 0\) for every
+\(n \in \mathbb{N}\) so that \(\mu (A) = \sum_{n = 1}^{\infty} \mu \left( E_{n}
+\cap A \right) = 0\).
+Note that the last claim follows since \(E_{n}\) are pairwise disjoint and
+\(\bigcup_{n = 1}^{\infty} E_{n} = X\), which implies that for any \(A \in
+\mathcal{B}\), \(E_{n} \cap A\) are pairwise disjoint and \(\bigcup_{n =
+1}^{\infty} \left( E_{n} \cap A \right) = A\).
+Therefore, \(\mu \ll \lambda\).
+\qed
+
+\subsection{Proof of
+\texorpdfstring{\Cref{thm--hellinger-diff-unaffected-by-dom}}{Theorem
+\ref{thm--hellinger-diff-unaffected-by-dom}}}
+\label{sec--prf--thm--hellinger-diff-unaffected-by-dom}
+
+
+Part \ref{thm--hellinger-diff-unaffected-by-dom-rn-chain-rule} of
+\Cref{thm--hellinger-diff-unaffected-by-dom} is a standard property of
+Radon-Nikodym derivatives.
+For \ref{thm--hellinger-diff-unaffected-by-dom-derivative-def},
+\begin{equation*}
+  \begin{split}
+  \lambda \left[ \left( g_{\ast, \tau} - g_{\ast, \theta} -
+  \left( \tau - \theta \right)^{\prime} \dot{g}_{\ast, \theta}
+  \right)^{2} \right] =
+  & \,
+  \lambda \left[ \left( g_{\tau} - g_{\theta} - \left( \tau - \theta
+  \right)^{\prime} \dot{g}_{\theta} \right)^{2} f^{2} \right] \\
+  =
+  & \,
+  \mu \left[ \left( g_{\tau} - g_{\theta} - \left( \tau - \theta
+  \right)^{\prime} \dot{g}_{\theta} \right)^{2} \right].
+  \end{split}
+\end{equation*}
+The right hand side is \(o \left( \left| \tau - \theta \right|^{2} \right)\) by
+Fr\'echet differentiability of \(\tau \mapsto g_{\tau}\) at \(\theta\).
+\qed
+
+\subsection{Proof of
+\texorpdfstring{\Cref{thm--density-preservation}}{Theorem
+\ref{thm--density-preservation}}}
+\label{sec--prf--thm--density-preservation}
+
+Let \(q = \mathrm{d} Q / \mathrm{d} \mu\) and as in
+\eqref{eqn--density-preservation}, denote
+\begin{equation}
+  q_{\ast} = \mu \left[ \frac{\mathrm{d} Q}{\mathrm{d} \mu} \middle| T \right]
+  \text{ and } p_{\ast} (t) = \mu \left[ \frac{\mathrm{d}
+  Q}{\mathrm{d} \mu} \middle| T = t \right], \text{ so that } q_{\ast} (x) =
+  p_{\ast} (T (x)) = \left( p_{\ast} \circ T \right) (x).
+  \label{eqn--density-preservation-1}
+\end{equation}
+\(\nu\) is a probability measure and hence \(\sigma\)-finite.
+Both \(P \ll \nu\) and \eqref{eqn--density-preservation} are proven if we show
+\begin{equation}
+  \nu \left[ p_{\ast} \cdot \mathbf{1}_{A} \right] = P (A) \quad \text{for
+  every } A \in \mathcal{B}^{\prime}.
+  \label{eqn--density-preservation-2}
+\end{equation}
+
+By the integral change of variables formula%
+\footnote{See for example \citet[Theorem 3.6.1]{2007bogachevMeasureTheory}},
+\begin{equation*}
+  \nu \left[ p_{\ast} \cdot \mathbf{1}_{A} \right] = (\mu \circ T^{- 1}) \left[
+  p_{\ast} \cdot \mathbf{1}_{A} \right] = \mu \left[ \left( p_{\ast} \cdot
+  \mathbf{1}_{A} \right) \circ T \right] = \mu \left[ \left( p_{\ast} \circ T
+  \right) \cdot \left( \mathbf{1}_{A} \circ T \right) \right].
+\end{equation*}
+By \(\mathbf{1}_{A} \circ T \equiv \mathbf{1}_{T^{- 1} (A)}\) and
+\eqref{eqn--density-preservation-1},
+\begin{equation*}
+  \nu \left[ p_{\ast} \cdot \mathbf{1}_{A} \right] = \mu \left[ q_{\ast}
+  \cdot \mathbf{1}_{T^{- 1} (A)} \right] = \mu \left[ \mu [q | T] \cdot
+  \mathbf{1}_{T^{- 1} (A)} \right].
+\end{equation*}
+By the definition of a conditional expectation,
+\(\mu \left[ \mu [q | T] \cdot \mathbf{1}_{T^{- 1} (A)} \right] = \mu \left[ q
+\cdot \mathbf{1}_{T^{- 1} (A)} \right]\) and so,
+\begin{equation*}
+  \nu \left[ p_{\ast} \cdot \mathbf{1}_{A} \right] =
+  \mu \left[ q \cdot \mathbf{1}_{T^{- 1} (A)} \right] = Q \left( T^{- 1}
+  (A) \right) = Q \circ T^{- 1} (A) =
+  P (A),
+\end{equation*}
+which shows \eqref{eqn--density-preservation-2}.
+\qed
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../note-dqm-transform"
+%%% End:

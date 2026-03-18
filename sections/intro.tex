@@ -1,0 +1,151 @@
+%! TEX root = ../note-dqm-transform.tex
+
+\section{Introduction}
+\label{sec--intro}
+
+Let \((\mathbf{X}, \mathcal{B})\) be a measurable space.
+We use linear functional notation for integrals: given a measure \(m\) on
+\((\mathbf{X}, \mathcal{B})\), \(m [f] := \int f (x) \; m (\mathrm{d} x)\).
+Furthermore, denote the Euclidean norm by \(|\cdot|\), i.e.
+\(|x|^{2} = \sum_{j = 1}^{d} x_{j}^{2}\) for any \(x \in \mathbb{R}^{d}\).
+
+Let \(\mu\) be a \(\sigma\)-finite measure on \((\mathbf{X}, \mathcal{B})\) and
+let \(\Theta\) be a non-empty subset of \(\mathbb{R}^{d}\) for fixed \(d \in
+\mathbb{N}\).
+Let \(\mathbf{Q} = \left\{ Q_{\tau} : \tau \in \Theta \right\}\) be a family
+of probability measures dominated by \(\mu\).
+Denote the \(\mu\)-densities and their square-roots by
+\begin{equation}
+  q_{\tau} (\cdot) := q (\cdot; \tau) := \frac{\mathrm{d}
+  Q_{\tau}}{\mathrm{d} \mu}, \quad \text{and} \quad g_{\tau} (\cdot) := g
+  (\cdot; \tau) := \sqrt{q (\cdot; \tau)}.
+  \label{eqn--q-density-and-sqrt}
+\end{equation}
+Since \(q_{\tau}\) is a \(\mu\)-density for a probability measure, \(\int
+g_{\tau}^{2} \; \mathrm{d} \mu = \int q_{\tau} \; \mathrm{d} \mu = 1\).
+Hence \(\tau \mapsto g_{\tau}\) maps \(\Theta\) into \(\mathscr{L}_{2} (\mu)\).
+
+\begin{definition}[Hellinger differentiability]
+\label{def--hellinger-diff}
+The map \(\tau \mapsto Q_{\tau}\) is Hellinger differentiable at \(\theta \in
+\Theta\) if there is a \(d\)-vector of \(\mathscr{L}_{2} (\mu)\) functions
+\(\dot{g}_{\theta} (\cdot) = \dot{g} \left( \cdot; \theta \right)\) such that
+\begin{equation}
+  \mu \left[ \rho_{\tau, \theta}^{2} \right] = o \left( \left| \tau -
+  \theta \right|^{2} \right) \text{ as } \tau \to \theta \text{ while }
+  \tau \in \Theta, \quad \text{where} \quad
+  \rho_{\tau, \theta} = g_{\tau} - g_{\theta} - \left(
+  \tau - \theta \right)^{\prime} \dot{g}_{\theta}.
+  \label{eqn--hellinger-diff-def-remainder}
+\end{equation}
+The map \(\tau \mapsto Q_{\tau}\) is Hellinger differentiable if it is
+Hellinger differentiable at every \(\tau \in \Theta\).
+\end{definition}
+
+Let \(T : (\mathbf{X}, \mathcal{B}) \to \left( \mathbf{X}^{\prime},
+\mathcal{B}^{\prime} \right)\) be a measurable transformation and
+consider the collection of pushforward probability measures:
+\begin{equation*}
+  \mathbf{P} = \{ P_{\tau} = Q_{\tau} \circ T^{- 1} : \tau \in \Theta\}.
+\end{equation*}
+The question of preservation of Hellinger differentiability under \(T\)
+essentially boils down to two questions:
+is the family \(\mathbf{P}\) dominated by a measure, say \(\nu\), and are the
+associated root-densities Hellinger differentiable (against \(\mathscr{L}_{2}
+(\nu)\)).
+A natural candidate for a dominating measure for \(\mathbf{P}\) would be the
+pushforward \(\nu = \mu \circ T^{- 1}\), but this is not necessarily
+\(\sigma\)-finite as illustrated by \Cref{eg--non-sigma-finite-pushforward}.
+
+\begin{example}
+\label{eg--non-sigma-finite-pushforward}
+Let \(T : \mathbb{R}^{2} \to \mathbb{R}^{2}\) be defined by \(T (x, y) = (y,
+\mathbf{1} \{x \leq y\})\) and let \(\mu\) be Lebesgue measure on
+\(\mathbb{R}^{2}\).
+Then \(\nu = \mu \circ T^{- 1}\) is not \(\sigma\)-finite.
+A deeper look at this failure of \(\sigma\)-finiteness is given in
+\Cref{sec--prf--eg--non-sigma-finite-pushforward}.
+\end{example}
+
+If \(\mu\) is a probability measure, its pushforward under any measurable
+transformation is automatically \(\sigma\)-finite.
+\Cref{thm--sigma-finite-meas-abs-bicont-prob-meas} shows that for
+\(\sigma\)-finite \(\mu\), it is always possible to find a probability
+measure \(\lambda\) such that both \(\mu \ll \lambda\) and \(\lambda \ll \mu\).
+Furthermore, \Cref{thm--hellinger-diff-unaffected-by-dom} shows that
+replacing \(\mu\) by \(\lambda\) such that \(\mu \ll \lambda\) does
+not affect Hellinger differentiability.
+
+
+\begin{theorem}
+\label{thm--sigma-finite-meas-abs-bicont-prob-meas}
+Let \(\mu\) be a positive \(\sigma\)-finite measure on \((\mathbf{X},
+\mathcal{B})\).
+There is a probability measure \(\lambda\) on \((\mathbf{X}, \mathcal{B})\) such
+that \(\mu \ll \lambda\) and \(\lambda \ll \mu\).
+\end{theorem}
+
+\begin{proof}
+See \Cref{sec--prf--thm--sigma-finite-meas-abs-bicont-prob-meas}.
+\end{proof}
+
+\begin{theorem}
+\label{thm--hellinger-diff-unaffected-by-dom}
+Let \(\mu, \lambda\) be \(\sigma\)-finite measures on \((\mathbf{X},
+\mathcal{B})\) such that \(\mu \ll \lambda\).
+Denote \(f^{2} = \mathrm{d} \mu / \mathrm{d} \lambda\).
+Let \(\mathbf{Q} = \left\{ Q_{\tau} : \tau \in \Theta \right\}\) be a family
+of probability measures dominated by \(\mu\) and denote \(g_{\tau}^{2} =
+\mathrm{d} Q_{\tau} / \mathrm{d} \mu\).
+Suppose also that \(\tau \mapsto g_{\tau}\) is Hellinger differentiable at
+\(\theta\) with derivative \(\dot{g}_{\theta}\).
+Then \(\mathbf{Q}\) satisfies the following:
+\begin{enumerate}[label=(\alph*)]
+  \item \label{thm--hellinger-diff-unaffected-by-dom-rn-chain-rule}
+    \(\mathbf{Q}\) is dominated by \(\lambda\) and its \(\lambda\)-densities
+    are \(g_{\ast, \tau}^{2} := g_{\tau}^{2} f^{2}\);
+  \item \label{thm--hellinger-diff-unaffected-by-dom-derivative-def}
+    The map \(\tau \mapsto g_{\ast, \tau}\) is Hellinger differentiable at
+    \(\theta\) with derivative \(\dot{g}_{\ast, \theta} =
+    \dot{g}_{\theta} f\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+See \Cref{sec--prf--thm--hellinger-diff-unaffected-by-dom}.
+\end{proof}
+
+Given
+\Cref{thm--sigma-finite-meas-abs-bicont-prob-meas,%
+thm--hellinger-diff-unaffected-by-dom}, we can assume that \(\mu\) is a
+probability measure.
+Then the pushforward measure \(\nu = \mu \circ T^{- 1}\) is also a
+probability measure and hence \(\sigma\)-finite.
+Let \(\mu [f | T]\) denote the conditional expectation of \(f\) given \(T\).
+\Cref{thm--density-preservation} shows that \(P_{\tau} = Q_{\tau} \circ T^{-
+1}\) is dominated by \(\nu\) and gives a form for the density \(p_{\tau}\) as a
+conditional expectation.
+
+\begin{theorem}
+\label{thm--density-preservation}
+Suppose that \(Q\) and \(\mu\) are probability measures on \((\mathbf{X},
+\mathcal{B})\) such that \(Q \ll \mu\).
+Let \(T : \mathbf{X} \mapsto \mathbf{X}^{\prime}\) be measurable from
+\((\mathbf{X}, \mathcal{B})\) to \(\left( \mathbf{X}^{\prime},
+\mathcal{B}^{\prime} \right)\), and denote \(\nu := \mu \circ T^{- 1}\).
+Then \(P = Q \circ T^{- 1} \ll \nu\) and
+\begin{equation}
+  \frac{\mathrm{d} P}{\mathrm{d} \nu} (t) = \mu \left[ \frac{\mathrm{d}
+  Q}{\mathrm{d} \mu} \middle| T = t \right] \quad \nu\text{-a.e}.
+  \label{eqn--density-preservation}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+See \Cref{sec--prf--thm--density-preservation}.
+\end{proof}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../note-dqm-transform"
+%%% End:

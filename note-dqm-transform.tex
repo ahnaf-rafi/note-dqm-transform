@@ -63,7 +63,7 @@ citecolor=blue
 % Extra operators and symbols
 % \DeclareMathOperator*{\argmax}{argmax}
 % \DeclareMathOperator*{\argmin}{argmin}
-% \DeclareMathOperator*{\Leb}{Leb}
+\def\Leb{\mathrm{Leb}}
 
 % Independence in Probability Theory and Statistics.
 \newcommand{\indep}{\mathrel{\perp \mspace{-11mu} \perp}}
@@ -98,8 +98,8 @@ citecolor=blue
 % \crefname{assumption}{assumption}{assumptions}
 % \newtheorem{asm}{Assumption}
 % \crefname{asm}{assumption}{assumptions}
-% \newtheorem{remark}{Remark}[section]
-% \newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{example}{Example}[section]
 % \newtheorem{notation}{Notation}[section]
 
 \theoremstyle{plain}
@@ -135,7 +135,14 @@ Measurable Transformations}
 \maketitle
 
 \input{sections/abstract.tex}
+\input{sections/intro.tex}
 
 \printbibliography
+
+\appendix
+
+\newpage
+
+\input{sections/intro-appendix.tex}
 
 \end{document}
