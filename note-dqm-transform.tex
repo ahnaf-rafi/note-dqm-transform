@@ -32,13 +32,6 @@ citecolor=blue
 %%%%%%%%%%%%%%%%%
 \usepackage{enumitem}
 
-%%%%%%%%%%
-% Tables %
-%%%%%%%%%%
-% \usepackage{float}
-% \usepackage{booktabs}
-% \usepackage{multirow}
-
 %%%%%%%%
 % Math %
 %%%%%%%%
@@ -46,11 +39,8 @@ citecolor=blue
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage{bm}
 \usepackage{mathrsfs}
-
-% Algorithms
-% \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+% \usepackage{bm}
 
 % Must be loaded after amsmath, but before new theorem defs.
 \usepackage[nameinlink]{cleveref}
@@ -60,15 +50,14 @@ citecolor=blue
   \let\cref\autoref
 }
 
-% Extra operators and symbols
-% \DeclareMathOperator*{\argmax}{argmax}
-% \DeclareMathOperator*{\argmin}{argmin}
-\def\Leb{\mathrm{Leb}}
+% Extra operators and symbols: uncomment as needed
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\D{\mathbb{D}}
+\def\E{\mathbb{E}}
+\def\ind{\mathbf{1}}
 
-% Independence in Probability Theory and Statistics.
-\newcommand{\indep}{\mathrel{\perp \mspace{-11mu} \perp}}
-
-% Probability operators: uncomment as needed
+% \newcommand{\indep}{\mathrel{\perp \mspace{-11mu} \perp}}
 % \def\Pr{\mathrm{Pr}}
 % \def\E{\mathrm{E}}
 % \def\Var{\mathrm{Var}}
@@ -80,12 +69,6 @@ citecolor=blue
 % \def\Bern{\mathrm{Bernoulli}}
 % \def\Unif{\mathrm{Uniform}}
 
-% \def\hatPr{\widehat{\mathrm{Pr}}}
-% \def\hatE{\widehat{\mathrm{E}}}
-% \def\hatVar{\widehat{\mathrm{Var}}}
-% \def\hatCov{\widehat{\mathrm{Cov}}}
-
-
 % Display breaks in aligned equations
 \allowdisplaybreaks
 
@@ -94,19 +77,17 @@ citecolor=blue
 % Theorem environments
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
-% \newtheorem{assumption}{Assumption}[section]
-% \crefname{assumption}{assumption}{assumptions}
-% \newtheorem{asm}{Assumption}
-% \crefname{asm}{assumption}{assumptions}
-\newtheorem{remark}{Remark}[section]
-\newtheorem{example}{Example}[section]
-% \newtheorem{notation}{Notation}[section]
+\newtheorem{assumption}{Assumption}
+\crefname{assumption}{assumption}{assumptions}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+% \newtheorem{notation}{Notation}
 
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}{Lemma}[section]
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
 % \crefname{lemma}{lemma}{lemmas}
-% \newtheorem{corollary}{Corollary}
+\newtheorem{corollary}{Corollary}
 
 %%%%%%%%%%%%%%%%
 % Bibliography %
@@ -135,7 +116,7 @@ Measurable Transformations}
 \maketitle
 
 \input{sections/abstract.tex}
-\input{sections/intro.tex}
+\input{sections/preserve-under-meas-map.tex}
 
 \printbibliography
 
@@ -143,6 +124,7 @@ Measurable Transformations}
 
 \newpage
 
-\input{sections/intro-appendix.tex}
+\input{sections/preserve-under-meas-map-appendix.tex}
+\input{sections/conditioning-appendix.tex}
 
 \end{document}

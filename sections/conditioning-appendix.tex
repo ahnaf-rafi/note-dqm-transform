@@ -1,0 +1,270 @@
+%! TEX root = ../note-dqm-transform.tex
+
+\section{Conditional Expectations}
+% \label{sec--conditioning}
+
+\subsection{Auxiliary Lemmas and their Proofs}
+
+\begin{lemma}
+\label{lem--nonneg-f-equal-cond-exp-pos-prodf}
+Let \(f\) be a non-negative integrable function on the probability space
+\((\mathbf{X}, \mathcal{B}, \mu)\).
+Let \(\mathcal{B}_{0}\) be a sub-\(\sigma\)-algebra of \(\mathcal{B}\), and
+let \(B = \left\{ \mu \left[ f \middle| \mathcal{B}_{0} \right] > 0 \right\}\).
+Then \(f = f \cdot \mathbf{1}_{B}\)
+\(\mu\)-a.e.
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem--nonneg-f-equal-cond-exp-pos-prodf}]
+Deduce that \(B \in \mathcal{B}_{0}\) and hence so is \(A := \mathbf{X}
+\setminus B = \left\{ \mu \left[ f \middle| \mathcal{B}_{0}
+\right] = 0 \right\}\), where the last equality follows from \(f \geq 0\)
+\(\mu\)-a.e.
+By definition of \(\mu \left[ f \middle| \mathcal{B}_{0} \right]\),
+\begin{equation*}
+  \mu \left[ f \mathbf{1}_{A} \right] = \mu \left[ \mu \left[ f \middle|
+  \mathcal{B}_{0} \right] \mathbf{1}_{A} \right] = 0,
+\end{equation*}
+where the last equality follows by definition of \(A\).
+Since \(f \mathbf{1}_{A} \geq 0\), we conclude that \(f \mathbf{1}_{A} = 0\)
+\(\mu\)-a.e.
+Therefore, \(f = f \mathbf{1}_{A} + f \mathbf{1}_{B} = f \mathbf{1}_{B}\)
+\(\mu\)-a.e.
+\end{proof}
+
+\begin{lemma}
+\label{lem--sqrt-integral-inequality}
+Let \(f_{1}, f_{2}, f_{3}\) be measurable functions on the probability space
+\((\mathbf{X}, \mathcal{B}, \mu)\) such that \(f_{1}, f_{2} \geq 0\)
+\(\mu\)-a.e, \(f_{1}, f_{2}, f_{3} \in \mathscr{L}_{1} (\mu)\) and
+\(\frac{f_{1} - f_{2} - f_{3}}{\sqrt{f_{1}} + \sqrt{f_{2}}} \in \mathscr{L}_{2}
+(\mu)\).
+Let \(\mathcal{B}_{0}\) be a sub-\(\sigma\)-algebra of \(\mathcal{B}\), and
+define
+\begin{equation*}
+  B = \left\{ \sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]} +
+  \sqrt{\mu \left[ f_{2} \middle| \mathcal{B}_{0} \right]} > 0 \right\}.
+\end{equation*}
+Then
+\begin{equation*}
+  \begin{split}
+    & \left( \sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]} -
+    \sqrt{\mu \left[ f_{2} \middle| \mathcal{B}_{0} \right]} -
+    \frac{\mu \left[ f_{3} \middle| \mathcal{B}_{0} \right]}{\sqrt{\mu \left[
+    f_{1} \middle| \mathcal{B}_{0} \right]} + \sqrt{\mu \left[ f_{2} \middle|
+    \mathcal{B}_{0} \right]}} \mathbf{1}_{B} \right)^{2} \\
+    \leq
+    & \, \mu \left[ \left( \sqrt{f_{1}} - \sqrt{f_{2}} -
+    \frac{f_{3}}{\sqrt{f_{1}} + \sqrt{f_{2}}} \right)^{2} \middle|
+    \mathcal{B}_{0} \right].
+  \end{split}
+\end{equation*}
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem--sqrt-integral-inequality}]
+Rewrite
+\begin{equation*}
+    \mu \left[ \left( \sqrt{f_{1}} - \sqrt{f_{2}} - \frac{f_{3}}{\sqrt{f_{1}} +
+    \sqrt{f_{2}}} \right)^{2} \middle| \mathcal{B}_{0} \right] = \mu \left[
+    \left( \frac{f_{1} - f_{2} - f_{3}}{\sqrt{f_{1}} + \sqrt{f_{2}}} \right)^{2}
+    \middle| \mathcal{B}_{0} \right].
+\end{equation*}
+By \Cref{lem--integral-of-ratio-squared-inequality},
+\begin{equation*}
+  \left( \mu \left[ f_{1} - f_{2} - f_{3} \middle| \mathcal{B}_{0} \right]
+  \right)^{2} \leq
+  \mu \left[ \left( \frac{f_{1} - f_{2} - f_{3}}{\sqrt{f_{1}} + \sqrt{f_{2}}}
+  \right)^{2} \middle| \mathcal{B}_{0} \right] \mu \left[ \left( \sqrt{f_{1}} +
+  \sqrt{f_{2}} \right)^{2} \middle| \mathcal{B}_{0} \right].
+\end{equation*}
+Furthermore, by Cauchy-Schwarz,
+\begin{equation*}
+  \begin{split}
+    \mu \left[ \left( \sqrt{f_{1}} + \sqrt{f_{2}} \right)^{2} \middle|
+    \mathcal{B}_{0} \right] =
+    & \, \mu \left[ f_{1} \middle| \mathcal{B}_{0} \right] + \mu \left[ f_{2}
+    \middle| \mathcal{B}_{0} \right] + 2 \mu \left[ \sqrt{f_{1}
+    f_{2}} \middle| \mathcal{B}_{0} \right] \\
+    \leq
+    & \, \mu \left[ f_{1} \middle| \mathcal{B}_{0} \right] + \mu \left[ f_{2}
+    \middle| \mathcal{B}_{0} \right] + 2 \sqrt{\mu \left[ f_{1} \middle|
+    \mathcal{B}_{0} \right] \mu \left[ f_{2} \middle| \mathcal{B}_{0} \right]}
+    \\
+    =
+    & \, \left( \sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]} +
+    \sqrt{\mu \left[ f_{2} \middle| \mathcal{B}_{0} \right]} \right)^{2}.
+  \end{split}
+\end{equation*}
+Combining the previous two displays,
+\begin{equation*}
+  \left( \mu \left[ f_{1} - f_{2} - f_{3} \middle| \mathcal{B}_{0} \right]
+  \right)^{2} \leq
+  \mu \left[ \left( \frac{f_{1} - f_{2} - f_{3}}{\sqrt{f_{1}} +
+  \sqrt{f_{2}}} \right)^{2} \middle| \mathcal{B}_{0} \right]
+  \left( \sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]} + \sqrt{\mu
+  \left[ f_{2} \middle| \mathcal{B}_{0} \right]} \right)^{2}.
+\end{equation*}
+Multiply both sides by \(\mathbf{1}_{B}\) to get
+\begin{equation*}
+  \left( \mu \left[ f_{1} - f_{2} - f_{3} \middle| \mathcal{B}_{0} \right]
+  \right)^{2} \mathbf{1}_{B} \leq
+  \mu \left[ \left( \frac{f_{1} - f_{2} - f_{3}}{\sqrt{f_{1}} +
+  \sqrt{f_{2}}} \right)^{2} \middle| \mathcal{B}_{0} \right]
+  \left( \sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]} + \sqrt{\mu
+  \left[ f_{2} \middle| \mathcal{B}_{0} \right]} \right)^{2} \mathbf{1}_{B}.
+\end{equation*}
+On \(B\), we can divide by the second quantity on the right hand side of the
+inequality so that
+\begin{equation*}
+  \begin{split}
+    \left( \frac{\mu \left[ f_{1} - f_{2} - f_{3} \middle| \mathcal{B}_{0}
+    \right]}{\sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]} +
+    \sqrt{\mu \left[ f_{2} \middle| \mathcal{B}_{0} \right]}} \right)^{2}
+    \mathbf{1}_{B} \leq
+    & \, \mu \left[ \left( \frac{f_{1} - f_{2} - f_{3}}{\sqrt{f_{1}} +
+    \sqrt{f_{2}}} \right)^{2} \middle| \mathcal{B}_{0} \right] \mathbf{1}_{B} \\
+    \leq & \, \mu \left[ \left( \frac{f_{1} - f_{2} -
+    f_{3}}{\sqrt{f_{1}} + \sqrt{f_{2}}} \right)^{2} \middle| \mathcal{B}_{0}
+    \right].
+  \end{split}
+\end{equation*}
+By \(f_{j} \geq 0\), \(\mu \left[ f_{j} \middle| \mathcal{B}_{0} \right] \geq
+0\) for both \(j = 1, 2\).
+Therefore,
+\begin{equation*}
+  \begin{split}
+    \frac{\mu \left[ f_{1} - f_{2} - f_{3} \middle| \mathcal{B}_{0}
+    \right]}{\sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]} +
+    \sqrt{\mu \left[ f_{2} \middle| \mathcal{B}_{0} \right]}}
+    \mathbf{1}_{B} =
+    & \, \left( \sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]}
+    - \sqrt{\mu \left[ f_{2} \middle| \mathcal{B}_{0} \right]} -
+    \frac{\mu \left[ f_{3} \middle| \mathcal{B}_{0}
+    \right]}{\sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]} +
+    \sqrt{\mu \left[ f_{2} \middle| \mathcal{B}_{0} \right]}} \right)
+    \mathbf{1}_{B} \\
+    =
+    & \, \left( \sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]}
+    - \sqrt{\mu \left[ f_{2} \middle| \mathcal{B}_{0} \right]}  \right)
+    \mathbf{1}_{B} - \frac{\mu \left[ f_{3} \middle| \mathcal{B}_{0}
+    \right]}{\sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]} +
+    \sqrt{\mu \left[ f_{2} \middle| \mathcal{B}_{0} \right]}} \mathbf{1}_{B} \\
+    =
+    & \,
+    \sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]} - \sqrt{\mu \left[
+    f_{2} \middle| \mathcal{B}_{0} \right]} - \frac{\mu \left[ f_{3} \middle|
+    \mathcal{B}_{0} \right]}{\sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0}
+    \right]} + \sqrt{\mu \left[ f_{2} \middle| \mathcal{B}_{0} \right]}}
+    \mathbf{1}_{B},
+  \end{split}
+\end{equation*}
+where the last line follows from non-negativity of \(\mu \left[ f_{j} \middle|
+\mathcal{B}_{0} \right]\) and the definition of \(B\).
+Combining the above two displays, we get
+\begin{equation*}
+  \begin{split}
+    & \left( \sqrt{\mu \left[ f_{1} \middle| \mathcal{B}_{0} \right]} -
+    \sqrt{\mu \left[ f_{2} \middle| \mathcal{B}_{0} \right]} -
+    \frac{\mu \left[ f_{3} \middle| \mathcal{B}_{0} \right]}{\sqrt{\mu \left[
+    f_{1} \middle| \mathcal{B}_{0} \right]} + \sqrt{\mu \left[ f_{2} \middle|
+    \mathcal{B}_{0} \right]}} \mathbf{1}_{B} \right)^{2} \\
+    \leq & \, \mu \left[ \left( \frac{f_{1} - f_{2} -
+    f_{3}}{\sqrt{f_{1}} + \sqrt{f_{2}}} \right)^{2} \middle| \mathcal{B}_{0}
+    \right] \\
+    \leq
+    & \, \mu \left[ \left( \sqrt{f_{1}} - \sqrt{f_{2}} -
+    \frac{f_{3}}{\sqrt{f_{1}} + \sqrt{f_{2}}} \right)^{2} \middle|
+    \mathcal{B}_{0} \right].
+  \end{split}
+\end{equation*}
+\end{proof}
+
+\begin{lemma}
+\label{lem--ratio-integrable-implication}
+Let \(r \in [1, \infty)\) \(f, g\) be measurable functions on a probability
+space \((\mathbf{X}, \mathcal{B}, \mu)\) with \((f / g) \in
+\mathscr{L}_{r} (\mu)\).
+Then
+\begin{equation}
+  \mu \{|f| > 0, g = 0\} = 0, \quad \text{and} \quad f \mathbf{1} \{g = 0\} = 0
+  \quad \mu\text{-a.e}.
+  \label{eqn--ratio-integrable-implication}
+\end{equation}
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem--ratio-integrable-implication}]
+The second part of \eqref{eqn--ratio-integrable-implication} is an immediate
+implication of the first part.
+It suffices to prove the first part for the case \(r = 1\), since the same proof
+applies with \(|f| / |g|\) replaced by \(|f|^{r} / |g|^{r}\).
+We prove the first part of \eqref{eqn--ratio-integrable-implication} by
+contrapositive.
+
+Suppose that \(\mu \{|f| > 0, g = 0\} > 0\).
+Then there is some \(\varepsilon > 0\) such that \(\mu \{|f| >
+\varepsilon, g = 0\} > 0\), since otherwise \(\mu \{|f| > (1 / n), g
+= 0\} = 0\) for every \(n \in \mathbb{N}\) and \(\mu \{|f| > 0, g = 0\} =
+\lim_{n \to \infty} \mu \{|f| > (1 / n), g = 0\} = 0\), a contradiction.
+But then \(f / g \not\in \mathscr{L}_{1} (\mu)\) because
+\begin{equation*}
+  \mu [|f| / |g|] \geq \mu [(|f| / |g|) \mathbf{1} \{|f| > \varepsilon, g = 0\}]
+  \geq \varepsilon \mu [(1 / |g|) \mathbf{1} \{|f| > \varepsilon, g = 0\}] =
+  \infty.
+\end{equation*}
+By contrapositive, \(\mu [|f| / |g|] < \infty\) implies \(\mu \{|f| > 0, g = 0\}
+= 0\).
+\end{proof}
+
+\begin{lemma}
+\label{lem--integral-of-ratio-squared-inequality}
+Let \(f, g\) be measurable functions on a probability space \((\mathbf{X},
+\mathcal{B}, \mu)\) with \(f \in \mathscr{L}_{1} (\mu)\) and \(g, (f / g) \in
+\mathscr{L}_{2} (\mu)\).
+Given any sub-\(\sigma\)-algebra \(\mathcal{B}_{0} \subseteq \mathcal{B}\),
+\begin{equation}
+  \left( \mu \left[ f \middle| \mathcal{B}_{0} \right] \right)^{2} \leq
+  \mu \left[ \left( \frac{f}{g} \right)^{2} \middle| \mathcal{B}_{0} \right]
+  \mu \left[ g^{2} \middle| \mathcal{B}_{0} \right].
+  \label{eqn--integral-of-ratio-squared-inequality}
+\end{equation}
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem--integral-of-ratio-squared-inequality}]
+By \Cref{lem--ratio-integrable-implication}, \((f / g) \in \mathscr{L}_{2}
+(\mu)\) implies that \(f = f \mathbf{1} \{g \neq 0\}\) and
+\((f / g) = (f / g) \mathbf{1} \{g \neq 0\}\).
+To see this, note that it suffices to prove the first equality and so,
+\begin{equation*}
+  \begin{gathered}
+    f = f \mathbf{1} \{g \neq 0\} + \underset{= 0 \
+    \mu\text{-a.e.}}{\underbrace{f \mathbf{1} \{g = 0\}}} = f \mathbf{1} \{g
+    \neq 0\} \quad \mu\text{-a.e}, \\
+    \text{so that }
+    \mu \left[ f \middle| \mathcal{B}_{0} \right] = \mu \left[ f
+    \mathbf{1} \{g \neq 0\} \middle| \mathcal{B}_{0} \right] \text{ and }
+    \mu \left[ (f / g)^{2} \middle| \mathcal{B}_{0} \right] = \mu \left[ (f
+    / g)^{2} \mathbf{1} \{g \neq 0\} \middle| \mathcal{B}_{0} \right] \quad
+    \mu\text{-a.e.}
+  \end{gathered}
+\end{equation*}
+Then, \eqref{eqn--integral-of-ratio-squared-inequality} follows from the
+Cauchy-Schwarz inequality:
+\begin{equation*}
+  \begin{split}
+    (\mu \left[ f \middle| \mathcal{B}_{0} \right])^{2}
+    =
+    & \, (\mu \left[ f \mathbf{1} \{g \neq 0\} \middle| \mathcal{B}_{0}
+    \right])^{2}
+    = \left( \mu \left[ \frac{f}{g} g \cdot \mathbf{1} \{g \neq 0\} \middle|
+    \mathcal{B}_{0} \right] \right)^{2} \\
+    \leq & \, \mu \left[ \left( \frac{f}{g} \right)^{2} \cdot \mathbf{1} \{g
+    \neq 0\} \middle| \mathcal{B}_{0} \right] \mu \left[ g^{2} \middle|
+    \mathcal{B}_{0} \right].
+  \end{split}
+\end{equation*}
+\end{proof}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../note-dqm-transform"
+%%% End:

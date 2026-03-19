@@ -1,0 +1,317 @@
+%! TEX root = ../note-dqm-transform.tex
+
+\section{Introduction}
+\label{sec--intro}
+
+Let \((\mathbf{X}, \mathcal{B})\) be a measurable space.
+We use linear functional notation for integrals: for a measure \(\mu\) on
+\((\mathbf{X}, \mathcal{B})\), \(\mu [f] := \int f (x) \; \mu (\mathrm{d} x)\).
+Furthermore let \(d \in \N\) and \(\Theta \subseteq \R^{d}\); denote the
+Euclidean norm on \(\R^{d}\) by \(|\cdot|\), i.e. \(|x|^{2} = \sum_{j = 1}^{d}
+x_{j}^{2}\) for any \(x \in \R^{d}\).
+Throughout, we let \(\mu\) be a \(\sigma\)-finite measure on \((\mathbf{X},
+\mathcal{B})\) and let \(\Theta\) be a non-empty subset of \(\R^{d}\).
+
+Let \(\mathbf{Q} = \left\{ Q_{\tau} : \tau \in \Theta \right\}\) be a family
+of probability measures dominated by \(\mu\), a \(\sigma\)-finite positive
+measure.
+Denote the \(\mu\)-densities and their square-roots by
+\begin{equation}
+  q_{\tau} (\cdot) := q (\cdot; \tau) := \frac{\mathrm{d}
+  Q_{\tau}}{\mathrm{d} \mu}, \quad \text{and} \quad g_{\tau} (\cdot) := g
+  (\cdot; \tau) := \sqrt{q (\cdot; \tau)}.
+  \label{eqn--q-density-and-sqrt}
+\end{equation}
+Since \(q_{\tau}\) is a \(\mu\)-density for a probability measure, \(\int
+g_{\tau}^{2} \; \mathrm{d} \mu = \int q_{\tau} \; \mathrm{d} \mu = 1\).
+Hence \(\tau \mapsto g_{\tau}\) maps \(\Theta\) into \(\mathscr{L}_{2} (\mu)\).
+A smoothness property of statistical models is Hellinger differentiability,
+which is essentially Fre\'echet differentiability of of the map \(\tau \mapsto
+g_{\tau}\).
+\Cref{def--frechet-diff-relative} provides a rigorous definition of the latter
+concept in more general \(\mathscr{L}_{r}\) spaces.
+
+\begin{definition}[Relative Fr\'echet Differentiability in \(\mathscr{L}_{r}
+(\mu)\)]
+\label{def--frechet-diff-relative}
+Let \(\theta \in \Theta\) and \(r \in [1, \infty)\).
+\(g : \Theta \to \mathscr{L}_{r} (\mu)\) is Fr\'echet differentiable at
+\(\theta\) relative to \(\Theta\) in \(\mathscr{L}_{r} (\mu)\) if there is a
+\(d\)-vector of \(\mathscr{L}_{r} (\mu)\) functions \(\dot{g}_{\theta} (\cdot) =
+\dot{g} \left( \cdot; \theta \right)\) such that
+\begin{equation}
+  \mu \left[ \left| \rho_{\tau, \theta} \right|^{r} \right] = o \left( \left|
+  \tau - \theta \right|^{r} \right) \text{ as } \tau \to \theta \text{ while }
+  \tau \in \Theta, \quad \text{where} \quad
+  \rho_{\tau, \theta} = g_{\tau} - g_{\theta} - \left(
+  \tau - \theta \right)^{\prime} \dot{g}_{\theta}.
+  \label{eqn--diff-def-remainder}
+\end{equation}
+Say that \(g\) is Fr\'echet differentiable relative to \(\Theta\) in
+\(\mathscr{L}_{r} (\mu)\) if \eqref{eqn--diff-def-remainder} holds at every
+\(\theta \in \Theta\).
+\end{definition}
+
+Henceforth, we shall refer to relative Fr\'echet differentiability in
+\(\mathscr{L}_{r}\) as simply ``differentiability'' for brevity.
+and when integration order is relevant, ``differentiability in
+\(\mathscr{L}_{r}\)''.
+The term ``Hellinger differentiability'' will be applied to the collection of
+dominated probability measures \(\mathbf{Q}\), and will be taken to mean
+``differentiability in \(\mathscr{L}_{2}\)'' applied specifically to unit norm
+maps \(\tau \mapsto g_{\tau}\) in \eqref{eqn--q-density-and-sqrt}.
+Hellinger differentiability provides some useful differentiability and
+contiguity properties of the densities \(\tau \mapsto q_{\tau} = g_{\tau}^{2}\).
+Furthermore, differentiability of \(\tau \mapsto g_{\tau}\) in the interior of
+\(\Theta\) implies that the derivative \(\dot{g}_{\theta}\) is null on
+\(Q_{\theta}\)-null sets.
+
+\begin{lemma}
+\label{lem--hellinger-diff-properties}
+Let \((\mathbf{X}, \mathcal{B}, \mu)\) be a measure space and let \(\tau
+\mapsto g_{\tau}\) be a map from \(\Theta \subseteq \mathbb{R}^{d}\) into
+\(\mathscr{L}_{2} (\mu)\) that is \(\mathscr{L}_{2} (\mu)\)-differentiable at
+\(\theta \in \Theta\) with derivative \(\dot{g}_{\theta}\).
+\begin{enumerate}[label=(\alph*)]
+  \item \label{lem--hellinger-diff-properties-q-diff-in-L1}
+    The map \(\tau \mapsto q_{\tau} := g_{\tau}^{2}\) is \(\mathscr{L}_{1}
+    (\mu)\)-differentiable at \(\theta\) with derivative \(\dot{q}_{\theta} = 2
+    g_{\theta} \dot{g}_{\theta}\).
+  \item \label{lem--hellinger-diff-properties-q-singularity-result}
+    If \(g_{\tau} \geq 0\) \(\mu\)-a.e for every \(\tau \in \Theta\), then
+    \begin{equation}
+      \mu \left[ g_{\tau}^{2} \cdot \mathbf{1} \left\{ g_{\theta} = 0
+      \right\} \right] = O \left( |\tau - \theta|^{2} \right).
+      \label{eqn--hellinger-diff-properties-q-singularity-result-1}
+    \end{equation}
+    Furthermore, if \(\theta \in \mathrm{int} (\Theta)\), then
+    \begin{equation}
+      \mu \left[ g_{\tau}^{2} \cdot \mathbf{1} \left\{ g_{\theta} = 0
+      \right\} \right] = o \left( |\tau - \theta|^{2} \right).
+      \label{eqn--hellinger-diff-properties-q-singularity-result}
+    \end{equation}
+  \item \label{lem--hellinger-diff-properties-dotg-singularity-result}
+    If \(g_{\tau} \geq 0\) \(\mu\)-a.e for every \(\tau \in \Theta\) and
+    \(\theta \in \mathrm{int} (\Theta)\), then
+    \begin{equation}
+      \mu \left[ \left| \dot{g}_{\theta} \right|^{2} \cdot \mathbf{1}
+      \left\{ g_{\theta} = 0 \right\} \right] = 0.
+      \label{eqn--hellinger-diff-properties-gdot-singularity-result}
+    \end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem--hellinger-diff-properties}]
+See \Cref{sec--prf--lem--hellinger-diff-properties}.
+\end{proof}
+
+Suppose that we are unable to directly observe draws \(X\) from distributions in
+\(\mathbf{Q}\).
+Instead we observe transformed draws \(T (X)\), where
+\(T : (\mathbf{X}, \mathcal{B}) \to \left( \mathbf{X}^{\prime},
+\mathcal{B}^{\prime} \right)\) is a measurable transformation.
+Consider the collection of pushforward probability measures:
+\begin{equation*}
+  \mathbf{P} = \{ P_{\tau} = Q_{\tau} \circ T^{- 1} : \tau \in \Theta\}.
+\end{equation*}
+The question of preservation of Hellinger differentiability under \(T\)
+essentially boils down to two questions:
+is the family \(\mathbf{P}\) dominated by a measure, say \(\nu\), and are the
+associated root-densities Hellinger differentiable (against \(\mathscr{L}_{2}
+(\nu)\)).
+A natural candidate for a dominating measure for \(\mathbf{P}\) would be the
+pushforward \(\nu = \mu \circ T^{- 1}\), but this is not necessarily
+\(\sigma\)-finite as illustrated by \Cref{eg--non-sigma-finite-pushforward}.
+
+\begin{example}
+\label{eg--non-sigma-finite-pushforward}
+Let \(T : \R^{2} \to \R^{2}\) be defined by \(T (x, y) = (y,
+\ind \{x \leq y\})\) and let \(\mu\) be Lebesgue measure on
+\(\R^{2}\).
+Then \(\nu = \mu \circ T^{- 1}\) is not \(\sigma\)-finite.
+A deeper look at this failure of \(\sigma\)-finiteness is given in
+\Cref{sec--prf--eg--non-sigma-finite-pushforward}.
+\end{example}
+
+If \(\mu\) is a probability measure, its pushforward under any measurable
+transformation is also a probability measure and thus automatically
+\(\sigma\)-finite.
+\Cref{lem--sigma-finite-meas-abs-bicont-prob-meas} shows that for
+\(\sigma\)-finite \(\mu\), it is always possible to find a probability
+measure \(\lambda\) such that both \(\mu \ll \lambda\) and \(\lambda \ll \mu\).
+Furthermore, \Cref{lem--hellinger-diff-unaffected-by-dom} shows that
+replacing \(\mu\) by \(\lambda\) such that \(\mu \ll \lambda\) does
+not affect differentiability in \(\mathscr{L}_{r}\).
+
+\begin{lemma}
+\label{lem--sigma-finite-meas-abs-bicont-prob-meas}
+Let \(\mu\) be a positive \(\sigma\)-finite measure on \((\mathbf{X},
+\mathcal{B})\).
+There is a probability measure \(\lambda\) on \((\mathbf{X}, \mathcal{B})\) such
+that \(\mu \ll \lambda\) and \(\lambda \ll \mu\).
+\end{lemma}
+
+\begin{lemma}
+\label{lem--hellinger-diff-unaffected-by-dom}
+Let \(\mu, \lambda\) be positive \(\sigma\)-finite measures on \((\mathbf{X},
+\mathcal{B})\) such that \(\mu \ll \lambda\).
+Let \(g\) be differentiable in \(\mathscr{L}_{r} (\mu)\) at \(\theta\) with
+derivative \(\dot{g}_{\theta}\).
+Let \(f^{r} = \mathrm{d} \mu / \mathrm{d} \lambda\),
+\(g_{\ast} := g \cdot f\) and
+\(\dot{g}_{\ast, \theta} := \dot{g}_{\theta} \cdot f\).
+Then \(g_{\ast}\) is differentiable in \(\mathscr{L}_{r} (\lambda)\) at
+\(\theta\) with derivative \(\dot{g}_{\ast, \theta}\).
+\end{lemma}
+
+\begin{proof}[Proofs of \Cref{lem--sigma-finite-meas-abs-bicont-prob-meas,%
+lem--hellinger-diff-unaffected-by-dom}]
+See \Cref{sec--prf--lem--sigma-finite-meas-abs-bicont-prob-meas,%
+sec--prf--lem--hellinger-diff-unaffected-by-dom} respectively.
+\end{proof}
+
+Thus from \Cref{lem--sigma-finite-meas-abs-bicont-prob-meas,%
+lem--hellinger-diff-unaffected-by-dom}, we can assume that \(\mu\) is a
+probability measure --- essentially nothing about differentiability in the
+original model is lost by doing so.
+\Cref{lem--density-preservation} shows that the pushforward \(P_{\tau} =
+Q_{\tau} \circ T^{- 1}\) is dominated by \(\nu\) and gives a form for the
+density \(p_{\tau}\) as a conditional expectation.
+To that end, let \(\mu [f | T]\) denote the conditional expectation of \(f\)
+given \(T\) under \(\mu\).
+Similarly, let \(\mu [f | T = t]\) denote the \(\nu\) almost everywhere unique
+\(T\)-measurable function \(t \mapsto \eta_{f, T} (t)\) such that
+\(\nu \left[ \eta_{f, T} \cdot \ind_{B} \right] = \mu \left[ f \cdot \ind_{T^{-
+1} (B)} \right]\) for every \(B \in \mathcal{B}^{\prime}\).
+
+\begin{lemma}
+\label{lem--density-preservation}
+Let \(Q\) and \(\mu\) be probability measures on \((\mathbf{X}, \mathcal{B})\)
+with \(Q \ll \mu\).
+Let \(T : \mathbf{X} \mapsto \mathbf{X}^{\prime}\) be measurable from
+\((\mathbf{X}, \mathcal{B})\) to \(\left( \mathbf{X}^{\prime},
+\mathcal{B}^{\prime} \right)\), and denote \(\nu := \mu \circ T^{- 1}\).
+Then \(P = Q \circ T^{- 1} \ll \nu\) and
+\begin{equation}
+  \frac{\mathrm{d} P}{\mathrm{d} \nu} (t) = \mu \left[ \frac{\mathrm{d}
+  Q}{\mathrm{d} \mu} \middle| T = t \right] \quad \nu \text{ almost everywhere}.
+  \label{eqn--density-preservation}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+See \Cref{sec--prf--lem--density-preservation}.
+\end{proof}
+
+Thus following are well defined as a result of \Cref{lem--density-preservation}:
+\begin{equation}
+  p_{\tau} (t) := p (t; \tau) := \frac{\mathrm{d}
+  P_{\tau}}{\mathrm{d} \nu} (t) = \mu \left[ q_{\tau} | T = t \right] , \quad
+  \text{and} \quad s_{\tau} (\cdot) := s
+  (\cdot; \tau) := \sqrt{p (\cdot; \tau)}.
+  \label{eqn--p-density-and-sqrt}
+\end{equation}
+Next, since conditional expectations are linear operators, we can expect them to
+preserve derivatives in the usual fashion of composition of linear transforms.
+Applied to the densities, we expect \(\mathscr{L}_{1} (\mu)\)-differentiability
+of \(q_{\tau}\) to translate directly to \(\mathscr{L}_{1}
+(\nu)\)-differentiability of \(p_{\tau}\).
+\Cref{lem--L1-diff-cond-exp} shows this, essentially as a consequence of the Law
+of Iterated Expectations.
+\Cref{cor--p-L1-diff} then arises as a direct consequence of
+\Cref{lem--hellinger-diff-properties}
+\ref{lem--hellinger-diff-properties-q-diff-in-L1} and
+\Cref{lem--L1-diff-cond-exp}, and shows that Hellinger differentiability of
+\(\mathbf{Q}\) at \(\theta\) translates immediately to \(\mathscr{L}_{1}
+(\nu)\)-differentiability of \(\tau \mapsto p_{\tau}\) at \(\theta\).
+
+\begin{lemma}
+\label{lem--L1-diff-cond-exp}
+Let \((\mathbf{X}, \mathcal{B}, \mu)\) be a probability space, \(\left(
+\mathbf{X}^{\prime}, \mathcal{B}^{\prime} \right)\) be a measurable space,
+\(T : \mathbf{X} \to \mathbf{X}^{\prime}\) be a measurable function and \(\nu =
+\mu \circ T^{- 1}\).
+Suppose \(\tau \mapsto q_{\tau}\) is
+\(\mathscr{L}_{1} (\mu)\)-differentiable at \(\theta \in \Theta\) with
+derivative \(\dot{q}_{\theta}\).
+Let \(p_{\tau} := \mu \left[ q_{\tau} | T = t \right]\) and \(\dot{p}_{\theta}
+(t) := \mu [\dot{q}_{\theta} | T = t]\).
+The map \(\tau \mapsto p_{\tau}\) is \(\mathscr{L}_{1} (\nu)\)-differentiable at
+\(\theta \in \Theta\) with derivative \(\dot{p}_{\theta}\).
+\end{lemma}
+
+\begin{corollary}
+\label{cor--p-L1-diff}
+Let \((\mathbf{X}, \mathcal{B}, \mu)\) be a probability space, \(\left(
+\mathbf{X}^{\prime}, \mathcal{B}^{\prime} \right)\) be a measurable space,
+\(T : \mathbf{X} \to \mathbf{X}^{\prime}\) be a measurable function and \(\nu =
+\mu \circ T^{- 1}\).
+Suppose \(\tau \mapsto g_{\tau}\) is Fr\'echet differentiable in
+\(\mathscr{L}_{2} (\mu)\) at \(\theta \in \Theta\).
+The map \(\tau \mapsto p_{\tau}\) defined by \(p_{\tau} (t) := \mu \left[
+g_{\tau}^{2} | T = t \right]\) is Fr\'echet differentiable in
+\(\mathscr{L}_{1} (\nu)\) at \(\theta\) with derivative
+\(\dot{p}_{\theta} (t) = \mu \left[ \dot{q}_{\theta} \middle| T = t \right] = 2
+\mu \left[ g_{\theta} \dot{g}_{\theta} \middle| T = t \right]\).
+\end{corollary}
+
+\begin{proof}[Proof of \Cref{lem--L1-diff-cond-exp}]
+First,
+\begin{align*}
+  \nu \left[ \left| p_{\tau} - p_{\theta} - (\tau - \theta)^{\prime}
+  \dot{p}_{\theta} \right| \right] =
+  & \, \mu \left[ \left| \mu \left[ q_{\tau} - q_{\theta} - (\tau -
+  \theta)^{\prime} \dot{q}_{\theta} \middle| T \right] \right| \right] \\
+  \leq
+  & \,\mu \left[ \mu \left[ \left| q_{\tau} - q_{\theta} - (\tau -
+  \theta)^{\prime} \dot{q}_{\theta} \right| \middle| T \right] \right]
+  =
+  \mu \left[ \left| q_{\tau} - q_{\theta} - (\tau - \theta)^{\prime}
+  \dot{q}_{\theta} \right| \right],
+\end{align*}
+By the Law of Iterated Expectations.
+By definition of \(\mathscr{L}_{1} (\mu)\)-differentiability, the last
+expression above is \(o (|\tau - \theta|)\).
+\end{proof}
+
+For \(\mathbf{P}\) to be Hellinger differentiable at \(\theta\)
+the map \(\tau \mapsto s_{\tau}\) in \eqref{eqn--p-density-and-sqrt} must be
+Fr\'echet differentiable in \(\mathscr{L}_{2} (\nu)\) at \(\theta\).
+We can formulate an intuitive conjecture for the derivative
+\(\dot{s}_{\theta}\) based on the relation \(s_{\tau}^{2} = p_{\tau}\).
+If \(\tau \mapsto s_{\tau}\) were Fr\'echet differentiable at \(\theta\) with
+derivative \(\dot{s}_{\theta}\), \Cref{lem--hellinger-diff-properties}
+\ref{lem--hellinger-diff-properties-q-diff-in-L1}
+would require \(\dot{p}_{\theta} = 2 s_{\theta} \dot{s}_{\theta}\).
+By \Cref{cor--p-L1-diff},
+\(2 \mu \left[ g_{\theta} \dot{g}_{\theta} \middle| T = t \right] = 2
+s_{\theta} \dot{s}_{\theta}\).
+Hence, taking care with regions in which \(p_{\tau} = s_{\tau} = 0\),
+\begin{equation}
+  \dot{s}_{\theta} (t) := \frac{\mathbf{1} \left\{ s_{\theta} (t) > 0
+  \right\}}{s_{\theta} (t)} \mu \left[ g_{\theta}
+  \dot{g}_{\theta} \middle| T = t \right] .
+  \label{eqn--dots-def}
+\end{equation}
+\Cref{thm--s-L2-diff} below proves that with this definition, Hellinger
+differentiability at interior points of \(\Theta\) is achieved.
+
+\begin{theorem}
+\label{thm--s-L2-diff}
+Let \((\mathbf{X}, \mathcal{B}, \mu)\) be a probability space, \(\left(
+\mathbf{X}^{\prime}, \mathcal{B}^{\prime} \right)\) be a measurable space,
+\(T : \mathbf{X} \to \mathbf{X}^{\prime}\) be a measurable function and \(\nu =
+\mu \circ T^{- 1}\).
+Suppose the map \(\tau \mapsto g_{\tau}\) is \(\mathscr{L}_{2}
+(\mu)\)-differentiable at \(\theta \in \mathrm{int} (\Theta)\) and that
+\(g_{\tau} \geq 0\) \(\mu\)-a.e. for each \(\tau \in \Theta\).
+The map \(\tau \mapsto s_{\tau}\) defined by \(s_{\tau} (t) := \sqrt{\mu
+\left[ g_{\tau}^{2} | T = t \right]}\) is Fr\'echet differentiable in
+\(\mathscr{L}_{2} (\nu)\) at \(\theta\) with derivative
+\(\dot{s}_{\theta}\) in \eqref{eqn--dots-def}.
+\end{theorem}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../note-dqm-transform"
+%%% End:
