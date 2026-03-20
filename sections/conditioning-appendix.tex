@@ -33,6 +33,30 @@ Therefore, \(f = f \mathbf{1}_{A} + f \mathbf{1}_{B} = f \mathbf{1}_{B}\)
 \end{proof}
 
 \begin{lemma}
+\label{lem--nonneg-f-cond-exp-null-subsets}
+Let \((\mathbf{X}, \mathcal{B}, \mu)\) be a probability space,
+\(\mathcal{B}_{0}\) be a sub-\(\sigma\)-algebra of \(\mathcal{B}\),
+and \(f\) be an integrable function with \(f \geq 0\) \(\mu\)-a.e.
+Then \(\mathbf{1} \left\{ \mu \left[ f \middle| \mathcal{B}_{0}
+\right] = 0 \right\} \leq \mathbf{1} \{f = 0\}\) \(\mu\)-a.e.
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem--nonneg-f-cond-exp-null-subsets}]
+Let \(\psi = \mu \left[ f \middle| \mathcal{B}_{0}
+\right]\) and note that \(\left\{ \psi = 0 \right\} \in \mathcal{B}_{0}\) and
+\(\psi \cdot \mathbf{1} \{\psi = 0\} = 0\) everywhere.
+Therefore,
+\(0 = \mu \left[ \psi \cdot \mathbf{1} \left\{ \psi = 0 \right\} \right] = \mu
+\left[ f \cdot \mathbf{1} \left\{ \psi = 0 \right\} \right]\).
+Deduce that a \(\mathbf{1} \{f > 0\} \mathbf{1} \left\{ \psi = 0 \right\} = 0\)
+almost everywhere \(\mu\).
+Therefore, by \(\mu\) almost everywhere non-negativity of \(f\),
+\(\mathbf{1} \left\{ \psi = 0 \right\} = \mathbf{1} \{f = 0\} \mathbf{1} \left\{
+\psi = 0 \right\} \leq \mathbf{1} \{f = 0\}\) with the first equality holding
+\(\mu\)-a.e.
+\end{proof}
+
+\begin{lemma}
 \label{lem--sqrt-integral-inequality}
 Let \(f_{1}, f_{2}, f_{3}\) be measurable functions on the probability space
 \((\mathbf{X}, \mathcal{B}, \mu)\) such that \(f_{1}, f_{2} \geq 0\)
