@@ -113,10 +113,448 @@ Measurable Transformations}
 
 \maketitle
 
-\input{sections/abstract.tex}
-\input{sections/dqm-def.tex}
-\input{sections/preserve-under-meas-map.tex}
-\input{sections/joint-marg-cond.tex}
+\begin{abstract}
+This note revisits a result on preservation of differentiability in quadratic
+mean under measurable transformations.
+The goal is to provide clarity about some of the technical machinery behind the
+result at the expense of lengthier exposition than can be found in some
+classical texts, e.g.
+\citet[Theorem 7.2, p. 70]{1981ibragimovStatisticalEstimation} and
+\citet[Proposition A.5.5, p. 461]{1998bickelEfficientAdaptiveEstimation},
+amongst others.
+\end{abstract}
+
+\section{Differentiability in quadratic mean}
+\label{sec--dqm-def}
+
+Let \((\mathbf{X}, \mathcal{B})\) be a measurable space.
+We use linear functional notation for integrals: for a measure \(\mu\) on
+\((\mathbf{X}, \mathcal{B})\), \(\mu [f] := \int f (x) \; \mu (\mathrm{d} x)\).
+Furthermore let \(d \in \mathbb{N}\) and \(\Theta \subseteq \R^{d}\); denote the
+Euclidean norm on \(\R^{d}\) by \(|\cdot|\), i.e. \(|x|^{2} = \sum_{j = 1}^{d}
+x_{j}^{2}\) for any \(x \in \R^{d}\).
+Throughout, we let \(\mu\) be a \(\sigma\)-finite measure on \((\mathbf{X},
+\mathcal{B})\) and let \(\Theta\) be a non-empty subset of \(\R^{d}\).
+
+Let \(\mathbf{Q} = \left\{ Q_{\theta} : \theta \in \Theta \right\}\) be a family
+of probability measures dominated by \(\mu\), a \(\sigma\)-finite positive
+measure.
+These are possible distributions for a random element \(X\) with values in
+\(\mathbf{X}\).
+Denote the \(\mu\)-densities by
+\begin{equation}
+  q_{\tau} (\cdot) := q (\cdot; \tau) := \frac{\mathrm{d}
+  Q_{\tau}}{\mathrm{d} \mu}.
+  \label{eqn--q-density-and-sqrt}
+\end{equation}
+Since \(q_{\theta}\) is a \(\mu\)-density for a probability measure, its square
+root inhabits \(\L_{2} (\mu)\).
+Differentiability in quadratic mean (DQM) is essentially Fr\'echet
+differentiability of the root-density map \(\theta \mapsto \sqrt{q_{\theta}}\),
+with some additional restrictions on the structure of the derivative.
+We first revisit the definition of Fr\'echet differentiation in
+\(\L_{r} (\mu)\) for generic \(r \in [1, \infty)\) in
+\Cref{def--frechet-diff-relative}.
+
+\begin{definition}[Relative Fr\'echet differentiability in \(\L_{r}
+(\mu)\)]
+\label{def--frechet-diff-relative}
+Let \(\theta_{0} \in \Theta\) and \(r \in [1, \infty)\).
+\(g : \Theta \to \L_{r} (\mu)\) is Fr\'echet differentiable at
+\(\theta_{0}\) relative to \(\theta_{0}\) in \(\L_{r} (\mu)\) if there
+is a \(d\)-vector of \(\L_{r} (\mu)\) functions \(\dot{g}_{\theta_{0}}
+(\cdot) = \dot{g} \left( \cdot; \theta_{0} \right)\) such that
+\begin{equation}
+  \begin{gathered}
+    \mu \left[ \left| \rho_{\theta, \theta_{0}} \right|^{r} \right] = o \left(
+    \left| \theta - \theta_{0} \right|^{r} \right) \text{ as } \theta \to
+    \theta_{0} \text{ while } \theta \in \Theta, \\
+    \text{where} \quad
+    \rho_{\theta, \theta_{0}} = g_{\theta} - g_{\theta_{0}} - \left(
+    \theta - \theta_{0} \right)^{\prime} \dot{g}_{\theta_{0}}.
+  \end{gathered}
+  \label{eqn--diff-def-remainder}
+\end{equation}
+Say that \(g\) is Fr\'echet differentiable relative to \(\theta_{0}\) in
+\(\L_{r} (\mu)\) if \eqref{eqn--diff-def-remainder} holds at every
+\(\theta_{0} \in \theta_{0}\).
+\end{definition}
+
+Henceforth, we shall refer to relative Fr\'echet differentiability in
+\(\L_{r}\) as simply ``\(\L_{r}\)-differentiability'' for
+brevity.
+Some useful \(\L_{1}\)-differentiability and contiguity results for
+densities arise solely from \(\L_{2}\)-differentiability of the
+root-density maps.
+At interior points of \(\Theta\), we get two additional benefits for
+non-negative maps:
+faster ``contiguity rates'' and nullity of the derivative
+\(\dot{g}_{\theta_{0}}\) on \(Q_{\theta_{0}}\)-null sets.
+
+\begin{lemma}
+\label{lem--hellinger-diff-properties}
+Let \((\mathbf{X}, \mathcal{B}, \mu)\) be a measure space and let \(\theta
+\mapsto g_{\theta}\) be a map from \(\Theta\) into \(\L_{2} (\mu)\)
+that is \(\L_{2} (\mu)\)-differentiable at
+\(\theta_{0} \in \Theta\) with derivative \(\dot{g}_{\theta_{0}}\).
+\begin{enumerate}[label=(\alph*)]
+  \item \label{lem--hellinger-diff-properties-q-diff-in-L1}
+    The map \(\theta \mapsto q_{\theta} := g_{\theta}^{2}\) is \(\L_{1}
+    (\mu)\)-differentiable at \(\theta_{0}\) with derivative \(\dot{q}_{\theta_{0}} = 2
+    g_{\theta_{0}} \dot{g}_{\theta_{0}}\).
+  \item \label{lem--hellinger-diff-properties-q-singularity-result}
+    If \(g_{\theta} \geq 0\) \(\mu\)-a.e for every \(\theta \in \Theta\), then
+    \begin{equation}
+      \mu \left[ g_{\theta}^{2} \cdot \mathbf{1} \left\{ g_{\theta_{0}} = 0
+      \right\} \right] = O \left( |\theta - \theta_{0}|^{2} \right).
+      \label{eqn--hellinger-diff-properties-q-singularity-result-1}
+    \end{equation}
+    Furthermore, if \(\theta_{0} \in \mathrm{int} (\Theta)\), then
+    \begin{equation}
+      \mu \left[ g_{\theta}^{2} \cdot \mathbf{1} \left\{ g_{\theta_{0}} = 0
+      \right\} \right] = o \left( |\theta - \theta_{0}|^{2} \right).
+      \label{eqn--hellinger-diff-properties-q-singularity-result}
+    \end{equation}
+  \item \label{lem--hellinger-diff-properties-dotg-singularity-result}
+    If \(g_{\theta} \geq 0\) \(\mu\)-a.e for every \(\theta \in \Theta\) and
+    \(\theta_{0} \in \mathrm{int} (\Theta)\), then
+    \begin{equation}
+      \mu \left[ \left| \dot{g}_{\theta_{0}} \right|^{2} \cdot \mathbf{1}
+      \left\{ g_{\theta_{0}} = 0 \right\} \right] = 0.
+      \label{eqn--hellinger-diff-properties-gdot-singularity-result}
+    \end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem--hellinger-diff-properties}]
+See \Cref{sec--prf--lem--hellinger-diff-properties}.
+\end{proof}
+
+Let \(g_{\theta} = \sqrt{q_{\theta}}\) denote the square roots of densities in
+\(\mathbf{Q}\).
+In some texts, e.g. \citet{1998bickelEfficientAdaptiveEstimation},
+differentiability in quadratic mean is defined as \(\L_{2}\)-differentiability
+of \(\theta \mapsto g_{\theta}\) at interior points of \(\Theta\).
+Denoting the log-density by \(\ell_{\theta} = \mathbf{1} \left\{
+q_{\theta} > 0 \right\} \log q_{\theta} = 2 \mathbf{1} \left\{ g_{\theta} > 0
+\right\} \log g_{\theta}\), the score would be defined via the chain rule as
+\begin{equation}
+  \dot{\ell}_{\theta_{0}} = \frac{2 \cdot \mathbf{1} \left\{ g_{\theta_{0}} > 0
+  \right\}}{g_{\theta_{0}}} \dot{g}_{\theta_{0}} \implies \dot{g}_{\theta_{0}}
+  = \frac{1}{2} \sqrt{q_{\theta_{0}}} \cdot \dot{\ell}_{\theta_{0}}.
+  \label{eqn--score-root-density-deriv}
+\end{equation}
+The \(\L_{2}\)-differentiability condition would then read:
+\begin{equation}
+  \mu \left[ \left( \sqrt{q_{\theta}} - \sqrt{q_{\theta_{0}}} - \frac{1}{2}
+  \sqrt{q_{\theta_{0}}} \cdot \dot{\ell}_{\theta_{0}}^{\prime} \left( \theta -
+  \theta_{0} \right) \right)^{2} \right] = o \left( \left| \theta -
+  \theta_{0} \right|^{2} \right).
+  \label{eqn--dqm-def-0}
+\end{equation}
+If we directly posit the existence of a \(\dot{\ell}_{\theta_{0}} \in \L_{2}
+\left( Q_{\theta_{0}} \right)\) such that \eqref{eqn--dqm-def-0} holds,
+then we get the properties
+\ref{lem--hellinger-diff-properties-q-singularity-result} and
+\ref{lem--hellinger-diff-properties-dotg-singularity-result} in
+\Cref{lem--hellinger-diff-properties} essentially for free.
+By doing so, we force
+\(\dot{g}_{\theta_{0}} = \frac{1}{2} \sqrt{q_{\theta_{0}}} \cdot
+\dot{\ell}_{\theta_{0}}\), whence
+\eqref{eqn--hellinger-diff-properties-gdot-singularity-result} in
+\Cref{lem--hellinger-diff-properties}
+\ref{lem--hellinger-diff-properties-dotg-singularity-result} is trivial.
+For \Cref{lem--hellinger-diff-properties}
+\ref{lem--hellinger-diff-properties-q-singularity-result}, note that since
+\(q_{\theta_{0}} \cdot \ind \left\{ q_{\theta_{0}} > 0 \right\} =
+q_{\theta_{0}}\) and \(\ind \left\{ q_{\theta_{0}}
+> 0 \right\} \ind \left\{ q_{\theta_{0}} = 0 \right\} = 0\),
+\begin{equation*}
+  \mu \left[ q_{\theta} \ind \left\{ q_{\theta_{0}} = 0 \right\} \right] \leq
+  \mu \left[ \left( \sqrt{q_{\theta}} - \sqrt{q_{\theta_{0}}} - \frac{1}{2}
+  \sqrt{q_{\theta_{0}}} \cdot \dot{\ell}_{\theta_{0}}^{\prime} \left( \theta -
+  \theta_{0} \right) \right)^{2} \right] = o \left( \left| \theta -
+  \theta_{0} \right|^{2} \right).
+\end{equation*}
+
+In any case, parts \ref{lem--hellinger-diff-properties-q-singularity-result} and
+\ref{lem--hellinger-diff-properties-dotg-singularity-result} of
+\Cref{lem--hellinger-diff-properties} carry much of the benefit (but not all) of
+\(\L_{2}\)-differentiability of the root-density map \(\theta \mapsto
+\sqrt{q}_{\theta}\).
+Thus some texts, e.g. \citet{2000lecamAsymptoticsStatisticsBasic}, take these
+properties as primitives in when defining the concept differentiability in
+quadratic mean.
+In fact, even the requirement of a common dominating measure \(\mu\) can be
+dispensed with when taking this approach.
+Given \(\theta_{0} \in \Theta\), by Lebesgue's Decomposition Theorem we can
+write
+\begin{equation}
+  Q_{\theta} = Q_{\theta, \theta_{0}}^{\perp} + Q_{\theta, \theta_{0}}
+  \quad \text{where} \quad
+  Q_{\theta, \theta_{0}}^{\perp} \perp Q_{\theta_{0}},
+  \quad \text{and} \quad
+  Q_{\theta, \theta_{0}} \ll Q_{\theta_{0}},
+  \label{eqn--Qtheta-leb-decomp}
+\end{equation}
+are the parts of \(Q_{\theta}\) that are singular and absolutely continuous
+respectively against \(Q_{\theta_{0}}\).
+Then part \ref{lem--hellinger-diff-properties-q-singularity-result}
+of \Cref{lem--hellinger-diff-properties} translates a requirement that
+\(Q_{\theta, \theta_{0}}^{\perp} (\mathbf{X}) = o \left( |\theta -
+\theta_{0}|^{2} \right)\).
+\Cref{def--dqm} combines this requirement with a version of
+\eqref{eqn--dqm-def-0} reformulated for \(\mathrm{d} Q_{\theta,
+\theta_{0}} / \mathrm{d} Q_{\theta_{0}}\), noting that the density is equivalent
+to \(1\)
+\(Q_{\theta_{0}}\)-a.e. when \(\theta = \theta_{0}\).
+
+\begin{definition}[Differentiability in Quadratic Mean]
+\label{def--dqm}
+\(\mathbf{Q}\) is differentiable in quadratic mean (DQM) at \(\theta_{0} \in
+\Theta\) if given the Lebesgue Decomposition in \eqref{eqn--Qtheta-leb-decomp},
+the following hold as \(\theta \to \theta_{0}\).
+\begin{enumerate}[label=(\roman*)]
+  \item \label{def--dqm-sing}
+    The singular part of \(Q_{\theta}\) with respect to \(Q_{\theta_{0}}\)
+    satisfies
+    \(Q_{\theta, \theta_{0}}^{\perp} (\mathbf{X}) = o \left( \left| \theta -
+    \theta_{0} \right|^{2} \right)\).
+  \item \label{def--dqm-ac-diff}
+    Let \(q_{\theta, \theta_{0}} = \mathrm{d} Q_{\theta, \theta_{0}} /
+    \mathrm{d} Q_{\theta_{0}}\) be the density of the absolutely continuous part
+    of \(Q_{\theta}\) with respect to \(Q_{\theta_{0}}\).
+    There exists a \(d\)-vector \(\dot{\ell}_{\theta_{0}} \in \L_{2} \left(
+    Q_{\theta_{0}} \right)\) such that
+    \begin{equation}
+      Q_{\theta_{0}} \left[ \left( \sqrt{q_{\theta, \theta_{0}}} - 1 -
+      \frac{1}{2} \dot{\ell}_{\theta_{0}}^{\prime} \left( \theta - \theta_{0}
+      \right) \right)^{2} \right] = o \left( \left| \theta - \theta_{0}
+      \right|^{2} \right).
+      \label{eqn--dqm-def}
+    \end{equation}
+\end{enumerate}
+\end{definition}
+
+For brevity we can simply re-parametrize to \(\theta_{0} = 0\), where we are
+denoting the origin in \(\R^{d}\) (at mild risk of abiguity) by \(0\).
+Set \(\theta_{0} = 0\) and assume \(\Theta\) contains an open neighborhood of
+\(0\).
+Then, \(Q_{0}\), \(q_{0}\) and \(\dot{\ell}_{0}\) are the true distribution,
+density and score.
+Similarly, \(Q_{\theta, 0}^{\perp}\) and \(Q_{\theta, 0}\) are the singular and
+absolutely continuous parts of \(Q_{\theta}\) against \(Q_{0}\), and
+\(q_{\theta, 0}\) is the density of \(Q_{\theta, 0}\) against \(Q_{0}\).
+
+\section{Preservation of DQM by measurable maps}
+\label{sec--dqm-and-meas-maps}
+
+Suppose now that instead of observing \(X \sim Q_{0}\), we observe the
+transformation \(T (X)\), where \(T : (\mathbf{X}, \mathcal{B}) \to \left(
+\mathbf{X}^{\prime}, \mathcal{B}^{\prime} \right)\) is a measurable
+transformation.
+The associated model is then the collection of pushforward probability measures:
+\begin{equation}
+  \mathbf{P} = \{ P_{\theta} : \theta \in \Theta\} \quad \text{where} \quad
+  P_{\theta} = Q_{\theta} \circ T^{- 1}.
+  \label{eqn--P-T-def}
+\end{equation}
+As before,
+\begin{equation}
+  P_{\theta} =  P_{\theta, 0}^{\perp} + P_{\theta, 0}
+  \quad \text{where} \quad
+  P_{\theta, 0}^{\perp} \perp P_{0},
+  \quad \text{and} \quad
+  P_{\theta, 0} \ll P_{0}.
+  \label{eqn--Ptheta-leb-decomp}
+\end{equation}
+The question is then whether \eqref{eqn--dqm-def} holds for the quantities in
+\eqref{eqn--Ptheta-leb-decomp}.
+An intuitive first step would be to inspect if a relationship can be established
+between the decompositon in \eqref{eqn--Ptheta-leb-decomp}
+and a ``Lebesgue pseudo-decompositon'':
+\begin{equation}
+  P_{\theta} = \tilde{P}_{\theta, 0}^{\perp} + \tilde{P}_{\theta, 0}
+  \quad \text{where} \quad
+  \tilde{P}_{\theta, 0}^{\perp} = Q_{\theta, 0}^{\perp} \circ T^{- 1},
+  \quad \text{and} \quad
+  \tilde{P}_{\theta, 0} = Q_{\theta, 0} \circ T^{- 1}.
+  \label{eqn--Ptheta-leb-decomp-pseudo}
+\end{equation}
+The decomposition \eqref{eqn--Ptheta-leb-decomp-pseudo} is called a ``Lebesgue
+pseudo-decomposition'' since it is not true in general that \(\tilde{P}_{\theta,
+0}^{\perp} = P_{\theta, 0}^{\perp}\) and \(\tilde{P}_{\theta, 0} = P_{\theta,
+0}\).
+In fact, only the inequalities
+\(\tilde{P}_{\theta, 0} \leq P_{\theta, 0}\) and
+\(\tilde{P}_{\theta, 0}^{\perp} \geq P_{\theta, 0}^{\perp}\) hold.
+
+\begin{lemma}
+\label{lem--density-preservation}
+Let \(Q\) be a measure and \(\mu\) be a probability measure on \((\mathbf{X},
+\mathcal{B})\) with \(Q \ll \mu\).
+Let \(T : \mathbf{X} \mapsto \mathbf{X}^{\prime}\) be measurable from
+\((\mathbf{X}, \mathcal{B})\) to \(\left( \mathbf{X}^{\prime},
+\mathcal{B}^{\prime} \right)\), and denote \(\nu := \mu \circ T^{- 1}\).
+Then \(P = Q \circ T^{- 1} \ll \nu\) and
+\begin{equation}
+  \frac{\mathrm{d} P}{\mathrm{d} \nu} (t) = \mu \left[ \frac{\mathrm{d}
+  Q}{\mathrm{d} \mu} \middle| T = t \right] \quad \nu \text{ almost everywhere}.
+  \label{eqn--density-preservation}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+See \Cref{sec--prf--lem--density-preservation}.
+\end{proof}
+
+\begin{lemma}
+\label{lem--leb-decomp-pseudo-ineqs}
+Let \(Q\) be a measure and \(\mu\) be positive measures on \((\mathbf{X},
+\mathcal{B})\).
+Denote the Lebesgue decomposition of \(Q\) in terms of \(\mu\) by
+\begin{equation*}
+  Q = Q^{\perp} + Q^{\mathrm{ac}} \quad \text{where} \quad Q^{\perp} \perp \mu
+  \quad \text{and} \quad Q^{\mathrm{ac}} \ll \mu.
+\end{equation*}
+Let \(T : \mathbf{X} \mapsto \mathbf{X}^{\prime}\) be measurable from
+\((\mathbf{X}, \mathcal{B})\) to \(\left( \mathbf{X}^{\prime},
+\mathcal{B}^{\prime} \right)\), and denote \(\nu := \mu \circ T^{- 1}\) and
+\(P = Q \circ T^{- 1}\).
+Denote the following:
+\begin{equation*}
+  \begin{gathered}
+    P = P^{\perp} + P^{\mathrm{ac}} \quad \text{where} \quad P^{\perp} \perp \nu
+    \quad \text{and} \quad P^{\mathrm{ac}} \ll \nu, \\
+    P = \tilde{P}^{\perp} + \tilde{P}^{\mathrm{ac}}
+    \quad \text{where} \quad
+    \tilde{P}^{\perp} = Q^{\perp} \circ T^{- 1} \quad \text{and} \quad
+    \tilde{P}^{\mathrm{ac}} = Q^{\mathrm{ac}} \circ T^{- 1}.
+  \end{gathered}
+\end{equation*}
+Then \(\tilde{P}^{\mathrm{ac}} \leq P^{\mathrm{ac}}\) and \(\tilde{P}^{\perp}
+\geq P^{\perp}\) hold.
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem--leb-decomp-pseudo-ineqs}]
+By \Cref{lem--density-preservation}, \(\tilde{P}^{\mathrm{ac}} \ll \nu\).
+Therefore, \(\tilde{P}^{\mathrm{ac}}\) has no singular component with respect to
+\(\nu\).
+Now take the Lebesgue decomposition of \(\tilde{P}^{\perp}\) with respect to
+\(\nu\):
+\begin{equation*}
+  \tilde{P}^{\perp} = \hat{P}^{\perp} + \hat{P}^{\mathrm{ac}} \quad \text{where}
+  \quad \hat{P}^{\perp} \perp \nu \quad \text{and} \quad \hat{P}^{\mathrm{ac}}
+  \ll \nu.
+\end{equation*}
+But then, \(P = \hat{P}^{\perp} + \hat{P}^{\mathrm{ac}} +
+\tilde{P}^{\mathrm{ac}}, \quad \hat{P}^{\perp} \perp \nu \quad \text{and} \quad
+\hat{P}^{\mathrm{ac}} + \tilde{P}^{\mathrm{ac}} \ll \nu\).
+By uniqueness of the Lebesgue decomposition, it is necessary that
+\(\hat{P}^{\perp} = P^{\perp}\).
+Thus \(\tilde{P}^{\perp} = P^{\perp} + \hat{P}^{\mathrm{ac}} \geq P^{\perp}\).
+\end{proof}
+
+\begin{theorem}
+\label{thm--P-dqm}
+Let \((\mathbf{X}, \mathcal{B}, \mu)\) be a probability space, \(\left(
+\mathbf{X}^{\prime}, \mathcal{B}^{\prime} \right)\) be a measurable space,
+\(T : \mathbf{X} \to \mathbf{X}^{\prime}\) be a measurable function.
+Let \(\mathbf{Q}\) be a probability model and \(\mathbf{P}\) its pusforward
+family under \(T\).
+If \(\mathbf{Q}\) is DQM at \(0 \in \Theta\) with score
+\(\dot{\ell}_{0}\), then \(\mathbf{P}\) is DQM at \(0\) with score
+\begin{equation}
+  \dot{\ell}_{T, 0} (t) = Q_{0} \left[ \dot{\ell}_{0} \middle| T = t \right].
+  \label{eqn--dotl-marg-T-def}
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof of \Cref{thm--P-dqm}]
+By \Cref{lem--leb-decomp-pseudo-ineqs},
+\(P_{\theta, 0}^{\perp} \left( \mathbf{X}^{\prime} \right) \leq
+\tilde{P}_{\theta, 0}^{\perp} \left( \mathbf{X}^{\prime} \right) =
+Q_{\theta, 0}^{\perp} (\mathbf{X}) = o \left( |\theta|^{2} \right)\), by
+\Cref{def--dqm} \ref{def--dqm-sing} applied to \(\mathbf{Q}\) at 0.
+Thus, \(P_{\theta, 0}^{\perp}\) satisfies
+\Cref{def--dqm} \ref{def--dqm-sing}.
+
+Let \(p_{\theta, 0} = \mathrm{d} P_{\theta, 0} / \mathrm{d} P_{0}\) and
+\(\tilde{p}_{\theta, 0} = \mathrm{d} \tilde{P}_{\theta, 0} / \mathrm{d} P_{0}\).
+By \Cref{lem--leb-decomp-pseudo-ineqs}, since \(\tilde{P}_{\theta, 0} \leq
+P_{\theta, 0}\) everywhere, \(\tilde{p}_{\theta, 0} \leq p_{\theta, 0}\) almost
+everywhere \(P_{0}\).
+Let
+\begin{equation*}
+  \psi_{\theta, 0} = p_{\theta, 0} - \tilde{p}_{\theta, 0},
+  \quad \text{and} \quad
+  \varphi_{\theta, 0} = \sqrt{p_{\theta, 0}} - \sqrt{\tilde{p}_{\theta, 0}}.
+\end{equation*}
+Note that
+\begin{equation*}
+    \left| \varphi_{\theta, 0} \right|^{2} = \left| \sqrt{p_{\theta, 0}} -
+    \sqrt{\tilde{p}_{\theta, 0}} \right|^{2} \leq \left| \sqrt{p_{\theta, 0}} -
+    \sqrt{\tilde{p}_{\theta, 0}} \right| \left| \sqrt{p_{\theta, 0}} +
+    \sqrt{\tilde{p}_{\theta, 0}} \right| = \left| p_{\theta, 0} -
+    \tilde{p}_{\theta, 0} \right| = \psi_{\theta, 0}.
+\end{equation*}
+Then
+\begin{equation}
+  \begin{split}
+    P_{0} \left[ \varphi_{\theta, 0}^{2} \right] \leq
+    & \,
+    P_{0} \psi_{\theta, 0} =
+    P_{\theta, 0} \left( \mathbf{X}^{\prime} \right) -
+    \tilde{P}_{\theta, 0} \left( \mathbf{X}^{\prime} \right) \leq P_{\theta}
+    \left( \mathbf{X}^{\prime} \right) - \tilde{P}_{\theta, 0} \left(
+    \mathbf{X}^{\prime} \right) = \tilde{P}_{\theta, 0}^{\perp} \left(
+    \mathbf{X}^{\prime} \right) \\
+    =
+    & \, Q_{\theta, 0}^{\perp} (\mathbf{X})
+    = o \left( |\theta|^{2} \right).
+  \end{split}
+  \label{eqn--ac-part-rem-neg}
+\end{equation}
+Define
+\begin{equation}
+  \begin{gathered}
+    \rho_{\theta, 0} = q_{\theta, 0} - 1 - \frac{1}{2} \dot{\ell}_{0}^{\prime}
+    \theta, \qquad r_{\theta, 0} = p_{\theta, 0} - 1 - \frac{1}{2}
+    \dot{\ell}_{T, 0}^{\prime} \theta \quad \text{and} \quad \tilde{r}_{\theta,
+    0} = \tilde{p}_{\theta, 0} - 1 - \frac{1}{2} \dot{\ell}_{T, 0}^{\prime}
+    \theta, \\
+    \text{so that} \quad r_{\theta, 0} = \tilde{r}_{\theta, 0} +
+    \varphi_{\theta, 0}.
+  \end{gathered}
+  \label{eqn--dqm-P-rem-defs}
+\end{equation}
+From \eqref{eqn--ac-part-rem-neg}, \eqref{eqn--dqm-P-rem-defs} and the fact that
+\(P_{0} \left[ \rho_{\theta, 0}^{2} \right] \leq 2 P_{0} \left[
+\tilde{\rho}_{\theta, 0}^{2} \right] + 2 P_{0} \left[ \varphi_{\theta, 0}^{2}
+\right]\), it remains to show then that \(P_{0} \left[
+\tilde{\rho}_{\theta, 0}^{2} \right] = o \left( |\theta|^{2} \right)\).
+
+Since \(\widetilde{P}_{\theta, 0} = Q_{\theta, 0} \circ T^{- 1}\), \(P_{0} =
+Q_{0} \circ T^{- 1}\) and \(Q_{\theta, 0} \ll Q_{0}\), it follows from
+\Cref{lem--density-preservation} that \(\tilde{p}_{\theta, 0} (t) = Q_{0} \left[
+q_{\theta, 0} \middle| T = t \right]\).
+Since \(\dot{\ell}_{T, 0} (t) = Q_{0} \left[ \dot{\ell}_{0} \middle| T = t
+\right]\), \(\tilde{r}_{\theta} = Q_{0} \left[ \rho_{\theta, 0} \middle| T = t
+\right]\).
+By Jensen's inequality, \(\tilde{r}_{\theta, 0}^{2} \leq Q_{0} \left[
+\rho_{\theta, 0}^{2} \middle| T = t \right]\).
+By \eqref{eqn--dqm-def} in \Cref{def--dqm} \ref{def--dqm-ac-diff} and the Law of
+Iterated Expectations,
+\(Q_{0} \left[ \tilde{r}_{\theta, 0}^{2} \right] \leq Q_{0} \left[
+\rho_{\theta, 0}^{2} \right] = o \left( |\theta|^{2} \right)\).
+Therefore, \(\mathbf{P}\) satisfies \Cref{def--dqm} \ref{def--dqm-ac-diff} at 0
+with the prescribed score function.
+\end{proof}
+
+\section{Conditionals density DQM in abstract}
+\label{sec--joint-marg-cond}
+
+% BOOKMARK
 
 \printbibliography
 
@@ -124,9 +562,229 @@ Measurable Transformations}
 
 \newpage
 
-\input{sections/dqm-def-appendix.tex}
-\input{sections/preserve-under-meas-map-appendix.tex}
-\input{sections/joint-marg-cond-appendix.tex}
-\input{sections/conditioning-appendix.tex}
+\section{Proofs of results in \Cref{sec--dqm-def}}
+% \label{sec--prf--intro}
+
+\subsection{Proof of \Cref{lem--hellinger-diff-properties}}
+\label{sec--prf--lem--hellinger-diff-properties}
+
+\subsubsection{Proof of part \ref{lem--hellinger-diff-properties-q-diff-in-L1}
+of \Cref{lem--hellinger-diff-properties}}
+
+From the expression for \(\rho_{\theta, \theta_{0}}\) in
+\eqref{eqn--diff-def-remainder},
+\begin{align*}
+  q_{\theta} - q_{\theta_{0}} - (\theta - \theta_{0})^{\prime}
+  \dot{q}_{\theta_{0}} =
+  & \,
+  g_{\theta}^{2} - g_{\theta_{0}}^{2} - (\theta - \theta_{0})^{\prime} \left( 2
+  g_{\theta_{0}} \dot{g}_{\theta_{0}} \right) \\
+  =
+  & \, \left( g_{\theta_{0}} + (\theta - \theta_{0})^{\prime}
+  \dot{g}_{\theta_{0}} + \rho_{\theta, \theta_{0}} \right)^{2} -
+  g_{\theta_{0}}^{2} - 2 g_{\theta_{0}} \cdot (\theta - \theta_{0})^{\prime}
+  \dot{g}_{\theta_{0}} \\
+  =
+  & \, \left( (\theta - \theta_{0})^{\prime} \dot{g}_{\theta_{0}} \right)^{2} +
+  \rho_{\theta, \theta_{0}}^{2} + 2 g_{\theta_{0}} \rho_{\theta, \theta_{0}} + 2
+  (\theta - \theta_{0})^{\prime} \dot{g}_{\theta_{0}} \rho_{\theta, \theta_{0}}.
+\end{align*}
+By the triangle inequality and the Cauchy-Schwarz inequality,
+\begin{equation*}
+  \left| q_{\theta} - q_{\theta_{0}} - (\theta - \theta_{0})^{\prime}
+  \dot{q}_{\theta_{0}} \right| \leq |\theta - \theta_{0}|^{2} \left|
+  \dot{g}_{\theta_{0}} \right|^{2} + \rho_{\theta, \theta_{0}}^{2} + 2
+  g_{\theta_{0}} \left| \rho_{\theta, \theta_{0}} \right| + 2 |\theta -
+  \theta_{0}| \left| \dot{g}_{\theta_{0}} \right| \left| \rho_{\theta,
+  \theta_{0}} \right|.
+\end{equation*}
+Hence,
+\begin{equation*}
+  \begin{split}
+    \mu \left[ \left| q_{\theta} - q_{\theta_{0}} - (\theta -
+    \theta_{0})^{\prime} \dot{q}_{\theta_{0}} \right| \right] \leq
+    & \, |\theta - \theta_{0}|^{2} \mu \left[ \left| \dot{g}_{\theta_{0}}
+    \right|^{2} \right] + \mu \left[ \rho_{\theta, \theta_{0}}^{2} \right] \\
+    & + 2 \mu \left[ g_{\theta_{0}} \left| \rho_{\theta, \theta_{0}} \right|
+    \right] + 2 |\theta - \theta_{0}| \mu \left[ \left| \dot{g}_{\theta_{0}}
+    \right| \left| \rho_{\theta, \theta_{0}} \right| \right].
+  \end{split}
+\end{equation*}
+By the Cauchy-Schwarz inequality (this time in \(\mathscr{L}_{2} (\mu)\)),
+\begin{align*}
+  \mu \left[ \left| q_{\theta} - q_{\theta_{0}} - (\theta - \theta_{0})^{\prime}
+  \dot{q}_{\theta_{0}} \right| \right] \leq
+  & \, |\theta - \theta_{0}|^{2} \mu \left[ \left| \dot{g}_{\theta_{0}}
+  \right|^{2} \right] + \mu \left[ \rho_{\theta, \theta_{0}}^{2} \right] + 2
+  \sqrt{\mu \left[ g_{\theta_{0}}^{2} \right] \mu \left[ \left| \rho_{\theta,
+  \theta_{0}} \right|^{2} \right]} \\
+  & + 2 |\theta - \theta_{0}| \sqrt{\mu \left[ \left| \dot{g}_{\theta_{0}}
+  \right|^{2} \right] \mu \left[ \left| \rho_{\theta, \theta_{0}} \right|^{2}
+  \right]} \\
+  =
+  & \, O \left( |\theta - \theta_{0}|^{2} \right) + o \left( |\theta -
+  \theta_{0}|^{2} \right) + o \left( |\theta - \theta_{0}| \right) + |\theta -
+  \theta_{0}| o (|\theta - \theta_{0}|) \\
+  =
+  & \, o (|\theta - \theta_{0}|).
+\end{align*}
+\qed
+
+\subsubsection{Proof of part
+\ref{lem--hellinger-diff-properties-q-singularity-result} of
+\Cref{lem--hellinger-diff-properties}}
+
+Use the remainder \(\rho_{\theta, \theta_{0}}\) defined in
+\eqref{eqn--diff-def-remainder} to write \(g_{\theta} = g_{\theta_{0}} + (\theta
+- \theta_{0})^{\prime} \dot{g}_{\theta_{0}} + \rho_{\theta, \theta_{0}}\).
+On the set \(\left\{ g_{\theta_{0}} = 0 \right\}\),
+\(g_{\theta} = (\theta - \theta_{0})^{\prime} \dot{g}_{\theta_{0}} +
+\rho_{\theta, \theta_{0}}\).
+Hence,
+\begin{equation*}
+  \begin{split}
+    \mu \left[ g_{\theta}^{2} \mathbf{1} \left\{ g_{\theta_{0}} = 0 \right\}
+    \right] =
+    & \, \mu \left[ \left( (\theta - \theta_{0})^{\prime} \dot{g}_{\theta_{0}} +
+    \rho_{\theta, \theta_{0}} \right)^{2} \mathbf{1} \left\{ g_{\theta_{0}} = 0
+    \right\} \right]
+    \leq
+    2 |\theta - \theta_{0}|^{2} \mu \left[ \left|
+    \dot{g}_{\theta_{0}} \right|^{2} \right] + 2 \mu \left[ \rho_{\theta,
+    \theta_{0}}^{2} \right] \\
+    =
+    & \, O \left( |\theta - \theta_{0}|^{2} \right) + o \left( |\theta -
+    \theta_{0}|^{2} \right) = O \left( |\theta - \theta_{0}|^{2} \right),
+  \end{split}
+\end{equation*}
+which proves \eqref{eqn--hellinger-diff-properties-q-singularity-result-1}.
+
+Now we prove \eqref{eqn--hellinger-diff-properties-q-singularity-result}.
+Let \(\tau = \theta - \theta_{0}\).
+By assumption \(\theta_{0} + \tau = \theta \in \Theta\) and since \(\theta_{0}
+\in \mathrm{int} (\Theta)\), for \(|\tau|\) sufficiently small we have
+\(\theta_{0} - \tau \in \Theta\) as well.
+Then
+\begin{equation*}
+  g_{\theta_{0} + \tau} + g_{\theta_{0} - \tau} = \left( \tau^{\prime}
+  \dot{g}_{\theta_{0}} + \rho_{\theta_{0} + \tau, \theta_{0}} \right) + \left( -
+  \tau^{\prime} \dot{g}_{\theta_{0}} + \rho_{\theta_{0} - \tau, \theta_{0}}
+  \right) = \rho_{\theta_{0} + \tau, \theta_{0}} + \rho_{\theta_{0} - \tau,
+  \theta_{0}}.
+\end{equation*}
+By non-negativity, \(0 \leq g_{\theta} \leq g_{\theta_{0} + \tau} +
+g_{\theta_{0} - \tau}\) and so by the inequality \((u + v)^{2} \leq 2 \left(
+u^{2} + v^{2} \right)\), \(g_{\theta}^{2} \leq \left( g_{\theta_{0} + \tau} +
+g_{\theta_{0} - \tau} \right)^{2} \leq 2 \rho_{\theta_{0} + \tau,
+\theta_{0}}^{2} + 2 \rho_{\theta_{0} - \tau, \theta_{0}}^{2}\).
+Therefore by \eqref{eqn--diff-def-remainder},
+\begin{equation*}
+  \mu \left[ g_{\theta}^{2} \cdot \mathbf{1} \left\{ g_{\theta_{0}} = 0 \right\}
+  \right] \leq 2 \mu \left[ \rho_{\theta_{0} + \tau, \theta_{0}}^{2} \right] + 2
+  \mu \left[ \rho_{\theta_{0} - \tau, \theta_{0}}^{2} \right] = o \left(
+  |\tau|^{2} \right) = o \left( |\theta - \theta_{0}|^{2} \right),
+\end{equation*}
+which establishes \eqref{eqn--hellinger-diff-properties-q-singularity-result}.
+\qed
+
+\subsubsection{Proof of part
+\ref{lem--hellinger-diff-properties-dotg-singularity-result}
+of \Cref{lem--hellinger-diff-properties}}
+
+Use \eqref{eqn--diff-def-remainder} to write
+\((\theta - \theta_{0})^{\prime} \dot{g}_{\theta_{0}} = g_{\theta} -
+g_{\theta_{0}} - \rho_{\theta, \theta_{0}}\).
+On \(\left\{ g_{\theta_{0}} = 0 \right\}\), \((\theta - \theta_{0})^{\prime}
+\dot{g}_{\theta_{0}} = g_{\theta} - \rho_{\theta, \theta_{0}}\).
+Hence \(\left( (\theta - \theta_{0})^{\prime} \dot{g}_{\theta_{0}} \right)^{2}
+\leq 2 g_{\theta}^{2} + 2 \rho_{\theta, \theta_{0}}^{2}\).
+Thus, by \eqref{eqn--diff-def-remainder} and
+\eqref{eqn--hellinger-diff-properties-q-singularity-result} in part
+\ref{lem--hellinger-diff-properties-q-singularity-result} (now proven),
+\begin{equation*}
+  \mu \left[ \left( (\theta - \theta_{0})^{\prime} \dot{g}_{\theta_{0}}
+  \right)^{2} \mathbf{1} \left\{ g_{\theta_{0}} = 0 \right\} \right] \leq 2 \mu
+  \left[ g_{\theta}^{2} \mathbf{1} \left\{ g_{\theta_{0}} = 0 \right\} \right] +
+  2 \mu \left[ \rho_{\theta, \theta_{0}}^{2} \mathbf{1} \left\{ g_{\theta_{0}} =
+  0 \right\} \right] = o \left( |\theta - \theta_{0}|^{2} \right).
+\end{equation*}
+Then we get that with \(C = \mu \left[ \dot{g}_{\theta_{0}}
+\dot{g}_{\theta_{0}}^{\prime} \mathbf{1} \left\{ g_{\theta_{0}} = 0 \right\}
+\right]\)
+\begin{equation*}
+  (\theta - \theta_{0})^{\prime} C (\theta - \theta_{0}) \leq \psi \left(
+  |\theta - \theta_{0}|^{2} \right),
+\end{equation*}
+for some function \(\psi (\cdot)\) that satisfies \(\psi (w) / |w|^{2} \to 0\)
+as \(|w| \to 0\).
+We are done if we show that \(C\) is the zero matrix, or equivalently that
+\(v^{\prime} C v\) for any \(v \neq \mathbf{0}\).
+First note that \(C\) is positive semi-definite and so \(v^{\prime} C v \geq
+0\).
+Set \(h = \alpha v\) for \(\alpha > 0\).
+Then
+\begin{equation*}
+  \alpha^{2} v^{\prime} C v \leq \psi(\alpha v), \text{ and so }
+  v^{\prime} C v \leq \frac{\psi(\alpha v)}{|\alpha v|^{2}} \cdot |v|^{2}.
+\end{equation*}
+Since \(|v| \neq 0\) and \(\psi(h) = o(|\tau|^{2})\) as \(|\tau| \to 0\), taking
+\(\alpha \to 0\) sends the right side to zero.
+So \(v^{\prime}Cv \leq 0\) for every \(v\).
+Combined with \(v^{\prime} C v \geq 0\), we get \(v^{\prime} C v = 0\).
+Since \(v\) was arbitrary, \(C\) is the zero matrix, which establishes
+\eqref{eqn--hellinger-diff-properties-gdot-singularity-result}.
+\qed
+
+\section{Proofs of results in \Cref{sec--dqm-and-meas-maps}}
+% \label{sec--prf--intro}
+
+\subsection{Proof of \Cref{lem--density-preservation}}
+\label{sec--prf--lem--density-preservation}
+
+Let \(q = \mathrm{d} Q / \mathrm{d} \mu\) and as in
+\eqref{eqn--density-preservation}, denote
+\begin{equation}
+  q_{\ast} = \mu \left[ \frac{\mathrm{d} Q}{\mathrm{d} \mu} \middle| T \right]
+  \text{ and } p_{\ast} (t) = \mu \left[ \frac{\mathrm{d}
+  Q}{\mathrm{d} \mu} \middle| T = t \right], \text{ so that } q_{\ast} (x) =
+  p_{\ast} (T (x)) = \left( p_{\ast} \circ T \right) (x).
+  \label{eqn--density-preservation-1}
+\end{equation}
+\(\nu\) is a probability measure and hence \(\sigma\)-finite.
+Both \(P \ll \nu\) and \eqref{eqn--density-preservation} are proven if we show
+\begin{equation}
+  \nu \left[ p_{\ast} \cdot \ind_{A} \right] = P (A) \quad \text{for
+  every } A \in \mathcal{B}^{\prime}.
+  \label{eqn--density-preservation-2}
+\end{equation}
+By the integral change of variables formula
+(see \citet[Theorem 3.6.1]{2007bogachevMeasureTheory}),
+\begin{equation*}
+  \nu \left[ p_{\ast} \cdot \ind_{A} \right] = (\mu \circ T^{- 1}) \left[
+  p_{\ast} \cdot \ind_{A} \right] = \mu \left[ \left( p_{\ast} \cdot
+  \ind_{A} \right) \circ T \right] = \mu \left[ \left( p_{\ast} \circ T
+  \right) \cdot \left( \ind_{A} \circ T \right) \right].
+\end{equation*}
+By \(\ind_{A} \circ T \equiv \ind_{T^{- 1} (A)}\) and
+\eqref{eqn--density-preservation-1},
+\begin{equation*}
+  \nu \left[ p_{\ast} \cdot \ind_{A} \right] = \mu \left[ q_{\ast}
+  \cdot \ind_{T^{- 1} (A)} \right] = \mu \left[ \mu [q | T] \cdot
+  \ind_{T^{- 1} (A)} \right].
+\end{equation*}
+By the definition of a conditional expectation,
+\(\mu \left[ \mu [q | T] \cdot \ind_{T^{- 1} (A)} \right] = \mu \left[ q
+\cdot \ind_{T^{- 1} (A)} \right]\) and so,
+\begin{equation*}
+  \nu \left[ p_{\ast} \cdot \ind_{A} \right] =
+  \mu \left[ q \cdot \ind_{T^{- 1} (A)} \right] = Q \left( T^{- 1}
+  (A) \right) = Q \circ T^{- 1} (A) =
+  P (A),
+\end{equation*}
+which shows \eqref{eqn--density-preservation-2}.
+\qed
+
+\section{Proofs of results in \Cref{sec--joint-marg-cond}}
+% \label{sec--prf--joint-marg-cond}
 
 \end{document}
