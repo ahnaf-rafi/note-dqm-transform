@@ -40,7 +40,7 @@ citecolor=blue
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{mathrsfs}
-% \usepackage{bm}
+\usepackage{bm}
 
 % Must be loaded after amsmath, but before new theorem defs.
 \usepackage[nameinlink]{cleveref}
@@ -177,7 +177,7 @@ is a \(d\)-vector of \(\L_{r} (\mu)\) functions \(\dot{g}_{\theta_{0}}
 \end{equation}
 Say that \(g\) is Fr\'echet differentiable relative to \(\theta_{0}\) in
 \(\L_{r} (\mu)\) if \eqref{eqn--diff-def-remainder} holds at every
-\(\theta_{0} \in \theta_{0}\).
+\(\theta_{0} \in \Theta\).
 \end{definition}
 
 Henceforth, we shall refer to relative Fr\'echet differentiability in
@@ -281,9 +281,9 @@ In any case, parts \ref{lem--hellinger-diff-properties-q-singularity-result} and
 \ref{lem--hellinger-diff-properties-dotg-singularity-result} of
 \Cref{lem--hellinger-diff-properties} carry much of the benefit (but not all) of
 \(\L_{2}\)-differentiability of the root-density map \(\theta \mapsto
-\sqrt{q}_{\theta}\).
+\sqrt{q_{\theta}}\).
 Thus some texts, e.g. \citet{2000lecamAsymptoticsStatisticsBasic}, take these
-properties as primitives in when defining the concept differentiability in
+properties as primitives when defining the concept differentiability in
 quadratic mean.
 In fact, even the requirement of a common dominating measure \(\mu\) can be
 dispensed with when taking this approach.
@@ -337,7 +337,7 @@ the following hold as \(\theta \to \theta_{0}\).
 \end{definition}
 
 For brevity we can simply re-parametrize to \(\theta_{0} = 0\), where we are
-denoting the origin in \(\R^{d}\) (at mild risk of abiguity) by \(0\).
+denoting the origin in \(\R^{d}\) (at mild risk of ambiguity) by \(0\).
 Set \(\theta_{0} = 0\) and assume \(\Theta\) contains an open neighborhood of
 \(0\).
 Then, \(Q_{0}\), \(q_{0}\) and \(\dot{\ell}_{0}\) are the true distribution,
@@ -457,10 +457,10 @@ Thus \(\tilde{P}^{\perp} = P^{\perp} + \hat{P}^{\mathrm{ac}} \geq P^{\perp}\).
 
 \begin{theorem}
 \label{thm--P-dqm}
-Let \((\mathbf{X}, \mathcal{B}, \mu)\) be a probability space, \(\left(
-\mathbf{X}^{\prime}, \mathcal{B}^{\prime} \right)\) be a measurable space,
+Let \((\mathbf{X}, \mathcal{B})\) and \(\left( \mathbf{X}^{\prime},
+\mathcal{B}^{\prime} \right)\) be measurable spaces,
 \(T : \mathbf{X} \to \mathbf{X}^{\prime}\) be a measurable function.
-Let \(\mathbf{Q}\) be a probability model and \(\mathbf{P}\) its pusforward
+Let \(\mathbf{Q}\) be a probability model and \(\mathbf{P}\) its pushforward
 family under \(T\).
 If \(\mathbf{Q}\) is DQM at \(0 \in \Theta\) with score
 \(\dot{\ell}_{0}\), then \(\mathbf{P}\) is DQM at \(0\) with score
@@ -479,80 +479,117 @@ Q_{\theta, 0}^{\perp} (\mathbf{X}) = o \left( |\theta|^{2} \right)\), by
 Thus, \(P_{\theta, 0}^{\perp}\) satisfies
 \Cref{def--dqm} \ref{def--dqm-sing}.
 
+Since \(\mathbf{Q}\) is DQM at 0,
+\begin{equation}
+  \text{letting} \quad \xi_{\theta, 0} = \sqrt{q_{\theta, 0}}, \quad
+  \rho_{\theta, 0} = \xi_{\theta, 0} - 1 - \frac{1}{2}
+  \dot{\ell}_{0}^{\prime} \theta \quad \text{satsifies} \quad Q_{0} \left[
+  \rho_{\theta, 0}^{2} \right] = o \left( |\theta|^{2} \right).
+  \label{eqn--dqm-Q-rem}
+\end{equation}
+Thus, setting
+\begin{equation}
+  \begin{gathered}
+  \bar{\xi}_{\theta, 0} (t) = Q_{0} \left[ \sqrt{q_{\theta, 0}} \middle| T = t
+  \right] \quad \text{and} \quad
+  \bar{\rho}_{\theta, 0} (t) = Q_{0} \left[ \rho_{\theta, 0} | T = t \right] =
+  \bar{\xi}_{\theta, 0} (t) - 1 - \frac{1}{2} \dot{\ell}_{T, 0} (t)^{\prime}
+  \theta, \\
+  \text{we have} \quad
+  Q_{0} \left[ \bar{\rho}_{\theta, 0}^{2} \right] = o \left( |\theta|^{2}
+  \right).
+  \end{gathered}
+  \label{eqn--dqm-Q-rem-avg-defs}
+\end{equation}
 Let \(p_{\theta, 0} = \mathrm{d} P_{\theta, 0} / \mathrm{d} P_{0}\) and
 \(\tilde{p}_{\theta, 0} = \mathrm{d} \tilde{P}_{\theta, 0} / \mathrm{d} P_{0}\).
-By \Cref{lem--leb-decomp-pseudo-ineqs}, since \(\tilde{P}_{\theta, 0} \leq
-P_{\theta, 0}\) everywhere, \(\tilde{p}_{\theta, 0} \leq p_{\theta, 0}\) almost
-everywhere \(P_{0}\).
-Let
-\begin{equation*}
-  \psi_{\theta, 0} = p_{\theta, 0} - \tilde{p}_{\theta, 0},
-  \quad \text{and} \quad
-  \varphi_{\theta, 0} = \sqrt{p_{\theta, 0}} - \sqrt{\tilde{p}_{\theta, 0}}.
-\end{equation*}
+Define
+\begin{equation}
+  \begin{gathered}
+    r_{\theta, 0} = \sqrt{p_{\theta, 0}} - 1 - \frac{1}{2} \dot{\ell}_{T,
+    0}^{\prime} \theta = \varphi_{\theta, 0} + \delta_{\theta, 0} +
+    \bar{\rho}_{\theta, 0} \\
+    \text{where} \quad
+    \varphi_{\theta, 0} = \sqrt{p_{\theta, 0}} - \sqrt{\tilde{p}_{\theta, 0}},
+    \quad \text{and} \quad
+    \delta_{\theta, 0} = \sqrt{\tilde{p}_{\theta, 0}} - \bar{\xi}_{\theta, 0}.
+  \end{gathered}
+  \label{eqn--dqm-P-rem-def}
+\end{equation}
+By \eqref{eqn--dqm-Q-rem-avg-defs}, it suffices to show that
+\(P_{0} \left[ \varphi_{\theta, 0}^{2} \right] = o \left( |\theta|^{2} \right)\)
+and \(P_{0} \left[ \delta_{\theta, 0}^{2} \right] = o \left( |\theta|^{2}
+\right)\).
+
+Start with \(\varphi_{\theta, 0}\).
+By \Cref{lem--leb-decomp-pseudo-ineqs} \(\tilde{P}_{\theta, 0} \leq
+P_{\theta, 0}\) everywhere, which implies \(\tilde{p}_{\theta, 0} \leq
+p_{\theta, 0}\) almost everywhere \(P_{0}\).
 Note that
 \begin{equation*}
     \left| \varphi_{\theta, 0} \right|^{2} = \left| \sqrt{p_{\theta, 0}} -
     \sqrt{\tilde{p}_{\theta, 0}} \right|^{2} \leq \left| \sqrt{p_{\theta, 0}} -
     \sqrt{\tilde{p}_{\theta, 0}} \right| \left| \sqrt{p_{\theta, 0}} +
     \sqrt{\tilde{p}_{\theta, 0}} \right| = \left| p_{\theta, 0} -
-    \tilde{p}_{\theta, 0} \right| = \psi_{\theta, 0}.
+    \tilde{p}_{\theta, 0} \right| = p_{\theta, 0} - \tilde{p}_{\theta, 0}.
 \end{equation*}
 Then
 \begin{equation}
   \begin{split}
     P_{0} \left[ \varphi_{\theta, 0}^{2} \right] \leq
     & \,
-    P_{0} \psi_{\theta, 0} =
-    P_{\theta, 0} \left( \mathbf{X}^{\prime} \right) -
-    \tilde{P}_{\theta, 0} \left( \mathbf{X}^{\prime} \right) \leq P_{\theta}
+    P_{0} \left[ p_{\theta, 0} - \tilde{p}_{\theta, 0} \right] = P_{\theta, 0}
     \left( \mathbf{X}^{\prime} \right) - \tilde{P}_{\theta, 0} \left(
-    \mathbf{X}^{\prime} \right) = \tilde{P}_{\theta, 0}^{\perp} \left(
-    \mathbf{X}^{\prime} \right) \\
+    \mathbf{X}^{\prime} \right) \leq P_{\theta} \left( \mathbf{X}^{\prime}
+    \right) - \tilde{P}_{\theta, 0} \left( \mathbf{X}^{\prime} \right) =
+    \tilde{P}_{\theta, 0}^{\perp} \left( \mathbf{X}^{\prime} \right) \\
     =
-    & \, Q_{\theta, 0}^{\perp} (\mathbf{X})
-    = o \left( |\theta|^{2} \right).
+    & \, Q_{\theta, 0}^{\perp} (\mathbf{X}) = o \left( |\theta|^{2} \right).
   \end{split}
   \label{eqn--ac-part-rem-neg}
 \end{equation}
-Define
-\begin{equation}
-  \begin{gathered}
-    \rho_{\theta, 0} = q_{\theta, 0} - 1 - \frac{1}{2} \dot{\ell}_{0}^{\prime}
-    \theta, \qquad r_{\theta, 0} = p_{\theta, 0} - 1 - \frac{1}{2}
-    \dot{\ell}_{T, 0}^{\prime} \theta \quad \text{and} \quad \tilde{r}_{\theta,
-    0} = \tilde{p}_{\theta, 0} - 1 - \frac{1}{2} \dot{\ell}_{T, 0}^{\prime}
-    \theta, \\
-    \text{so that} \quad r_{\theta, 0} = \tilde{r}_{\theta, 0} +
-    \varphi_{\theta, 0}.
-  \end{gathered}
-  \label{eqn--dqm-P-rem-defs}
-\end{equation}
-From \eqref{eqn--ac-part-rem-neg}, \eqref{eqn--dqm-P-rem-defs} and the fact that
-\(P_{0} \left[ \rho_{\theta, 0}^{2} \right] \leq 2 P_{0} \left[
-\tilde{\rho}_{\theta, 0}^{2} \right] + 2 P_{0} \left[ \varphi_{\theta, 0}^{2}
-\right]\), it remains to show then that \(P_{0} \left[
-\tilde{\rho}_{\theta, 0}^{2} \right] = o \left( |\theta|^{2} \right)\).
 
-Since \(\widetilde{P}_{\theta, 0} = Q_{\theta, 0} \circ T^{- 1}\), \(P_{0} =
-Q_{0} \circ T^{- 1}\) and \(Q_{\theta, 0} \ll Q_{0}\), it follows from
-\Cref{lem--density-preservation} that \(\tilde{p}_{\theta, 0} (t) = Q_{0} \left[
-q_{\theta, 0} \middle| T = t \right]\).
-Since \(\dot{\ell}_{T, 0} (t) = Q_{0} \left[ \dot{\ell}_{0} \middle| T = t
-\right]\), \(\tilde{r}_{\theta} = Q_{0} \left[ \rho_{\theta, 0} \middle| T = t
-\right]\).
-By Jensen's inequality, \(\tilde{r}_{\theta, 0}^{2} \leq Q_{0} \left[
-\rho_{\theta, 0}^{2} \middle| T = t \right]\).
-By \eqref{eqn--dqm-def} in \Cref{def--dqm} \ref{def--dqm-ac-diff} and the Law of
-Iterated Expectations,
-\(Q_{0} \left[ \tilde{r}_{\theta, 0}^{2} \right] \leq Q_{0} \left[
-\rho_{\theta, 0}^{2} \right] = o \left( |\theta|^{2} \right)\).
-Therefore, \(\mathbf{P}\) satisfies \Cref{def--dqm} \ref{def--dqm-ac-diff} at 0
-with the prescribed score function.
+The argument for \(\delta_{\theta, 0}\) is a little more delicate.
+By the conditional form of Jensen's inequality,
+\begin{equation*}
+  \delta_{\theta, 0} = \sqrt{Q_{0} \left[ q_{\theta, 0} | T \right]} - Q_{0}
+  \left[ \sqrt{q_{\theta, 0}} | T \right] \geq 0.
+\end{equation*}
+\(\bar{\xi}_{\theta, 0}\) is a conditional mean of \(\xi_{\theta, 0}\) and in
+the following argument, the conditional variance of \(\xi_{\theta, 0}\) will
+also be useful.
+Denote this by
+\begin{equation*}
+  \sigma_{\theta, 0}^{2} (t) = Q_{0} \left[ q_{\theta, 0} \middle| T = t \right]
+  - \bar{\xi}_{\theta, 0} (t)^{2} = \widetilde{p}_{\theta, 0} (t) -
+  \bar{\xi}_{\theta, 0} (t)^{2}.
+\end{equation*}
+Note that since \(\widetilde{p}_{\theta, 0} = \left( \bar{\xi}_{\theta, 0} +
+\delta_{\theta, 0} \right)^{2}\) as well, we get the relationship
+\begin{equation*}
+  \sigma_{\theta, 0}^{2} (t) + \bar{\xi}_{\theta, 0} (t)^{2} =
+  \widetilde{p}_{\theta, 0} = \left( \bar{\xi}_{\theta, 0} +
+  \delta_{\theta, 0} \right)^{2} \equiv
+  \sigma_{\theta, 0}^{2} (t) = 2 \bar{\xi}_{\theta, 0} \delta_{\theta, 0} +
+  \delta_{\theta, 0}^{2}.
+\end{equation*}
 \end{proof}
 
 \section{Conditionals density DQM in abstract}
 \label{sec--joint-marg-cond}
+
+Given \(T\), \(\mathbf{Q}\) and \(\mathbf{P}\), consider the conditional model
+\begin{equation*}
+  \bm{\Pi} = \left\{ \Pi_{\theta} (\cdot | t) : \theta \in \Theta, t \in T
+  \left( \mathbf{X}^{\prime} \right) \right\}.
+\end{equation*}
+Each \(\Pi_{\theta}\) is a disintegration of \(Q_{\theta}\) against \(\left( T,
+P_{\theta} \right)\) in the sense of
+\citet{1997changConditioningAsDisintegration}.
+If needed, assume that \(\mathbf{X}\) (or \(\mathbf{X}^{\prime}\)) is a Radon
+space and \(\mathcal{B}\) (or \(\mathcal{B}^{\prime}\)) is the associated Borel
+collection.
+
 
 % BOOKMARK
 
@@ -718,7 +755,7 @@ Then we get that with \(C = \mu \left[ \dot{g}_{\theta_{0}}
 for some function \(\psi (\cdot)\) that satisfies \(\psi (w) / |w|^{2} \to 0\)
 as \(|w| \to 0\).
 We are done if we show that \(C\) is the zero matrix, or equivalently that
-\(v^{\prime} C v\) for any \(v \neq \mathbf{0}\).
+\(v^{\prime} C v = 0\) for any \(v \neq \mathbf{0}\).
 First note that \(C\) is positive semi-definite and so \(v^{\prime} C v \geq
 0\).
 Set \(h = \alpha v\) for \(\alpha > 0\).
