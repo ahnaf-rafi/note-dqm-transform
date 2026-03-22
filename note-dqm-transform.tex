@@ -496,7 +496,7 @@ Thus, setting
   \bar{\xi}_{\theta, 0} (t) - 1 - \frac{1}{2} \dot{\ell}_{T, 0} (t)^{\prime}
   \theta, \\
   \text{we have} \quad
-  Q_{0} \left[ \bar{\rho}_{\theta, 0}^{2} \right] = o \left( |\theta|^{2}
+  P_{0} \left[ \bar{\rho}_{\theta, 0}^{2} \right] = o \left( |\theta|^{2}
   \right).
   \end{gathered}
   \label{eqn--dqm-Q-rem-avg-defs}
@@ -550,29 +550,146 @@ Then
 \end{equation}
 
 The argument for \(\delta_{\theta, 0}\) is a little more delicate.
-By the conditional form of Jensen's inequality,
+Recall that \(\delta_{\theta, 0} = \sqrt{\tilde{p}_{\theta, 0}} -
+\bar{\xi}_{\theta, 0}\) and that
+\(\bar{\xi}_{\theta, 0}\) is a conditional mean of \(\xi_{\theta, 0} =
+\sqrt{q_{\theta, 0}}\).
+In subsequent arguments, the conditional variance of \(\xi_{\theta, 0}\) will
+also be useful; denote this by
 \begin{equation*}
-  \delta_{\theta, 0} = \sqrt{Q_{0} \left[ q_{\theta, 0} | T \right]} - Q_{0}
-  \left[ \sqrt{q_{\theta, 0}} | T \right] \geq 0.
-\end{equation*}
-\(\bar{\xi}_{\theta, 0}\) is a conditional mean of \(\xi_{\theta, 0}\) and in
-the following argument, the conditional variance of \(\xi_{\theta, 0}\) will
-also be useful.
-Denote this by
-\begin{equation*}
-  \sigma_{\theta, 0}^{2} (t) = Q_{0} \left[ q_{\theta, 0} \middle| T = t \right]
-  - \bar{\xi}_{\theta, 0} (t)^{2} = \widetilde{p}_{\theta, 0} (t) -
+  \sigma_{\theta, 0}^{2} (t) = Q_{0} \left[ \xi_{\theta, 0}^{2} \middle| T = t
+  \right] - \bar{\xi}_{\theta, 0} (t)^{2} = \tilde{p}_{\theta, 0} (t) -
   \bar{\xi}_{\theta, 0} (t)^{2}.
 \end{equation*}
-Note that since \(\widetilde{p}_{\theta, 0} = \left( \bar{\xi}_{\theta, 0} +
-\delta_{\theta, 0} \right)^{2}\) as well, we get the relationship
+Note then that this implies \(\tilde{p}_{\theta, 0} = \bar{\xi}_{\theta, 0}^{2}
++ \sigma_{\theta, 0}^{2}\) and so
 \begin{equation*}
-  \sigma_{\theta, 0}^{2} (t) + \bar{\xi}_{\theta, 0} (t)^{2} =
-  \widetilde{p}_{\theta, 0} = \left( \bar{\xi}_{\theta, 0} +
-  \delta_{\theta, 0} \right)^{2} \equiv
-  \sigma_{\theta, 0}^{2} (t) = 2 \bar{\xi}_{\theta, 0} \delta_{\theta, 0} +
-  \delta_{\theta, 0}^{2}.
+  \delta_{\theta, 0} = \sqrt{\tilde{p}_{\theta, 0}} - \bar{\xi}_{\theta, 0} =
+  \sqrt{\bar{\xi}_{\theta, 0}^{2} + \sigma_{\theta, 0}^{2}} - \bar{\xi}_{\theta,
+  0} \geq 0.
 \end{equation*}
+By \Cref{lem--sqrt-diff-bound}, given any \(\alpha, \varepsilon > 0\),
+\begin{equation*}
+  0 \leq \delta_{\theta, 0} \leq \frac{\sigma_{\theta, 0}^{2}}{2 \varepsilon}
+  \cdot \mathbf{1} \left\{ \bar{\xi}_{\theta, 0} \geq \varepsilon,
+  \sigma_{\theta, 0} \leq \alpha \right\} +
+  \sigma_{\theta, 0} \cdot \mathbf{1} \left\{ \bar{\xi}_{\theta, 0} <
+  \varepsilon \text{ or } \sigma_{\theta, 0} > \alpha \right\}.
+\end{equation*}
+Then,
+\begin{equation*}
+  \delta_{\theta, 0}^{2} \leq \frac{\alpha^{2} \sigma_{\theta, 0}^{2}}{2
+  \varepsilon} \cdot \mathbf{1} \left\{ \bar{\xi}_{\theta, 0} \geq \varepsilon,
+  \sigma_{\theta, 0} \leq \alpha \right\} +
+  \sigma_{\theta, 0}^{2} \cdot \mathbf{1} \left\{ \bar{\xi}_{\theta, 0} <
+  \varepsilon \text{ or } \sigma_{\theta, 0} > \alpha \right\}.
+\end{equation*}
+Therefore,
+\begin{equation}
+  P_{0} \left[ \delta_{\theta, 0}^{2} \right] \leq \frac{\alpha^{2}}{2
+  \varepsilon} P_{0} \left[ \sigma_{\theta, 0}^{2} \cdot \mathbf{1} \left\{
+  \bar{\xi}_{\theta, 0} \geq \varepsilon, \sigma_{\theta, 0} \leq \alpha
+  \right\} \right] + P_{0} \left[ \sigma_{\theta, 0}^{2} \cdot \mathbf{1}
+  \left\{ \bar{\xi}_{\theta, 0} < \varepsilon \text{ or } \sigma_{\theta, 0} >
+  \alpha \right\} \right]
+  \label{eqn--Edelta2-bound-1}
+\end{equation}
+
+By \eqref{eqn--dqm-Q-rem-avg-defs} and \(\dot{\ell}_{T, 0} \in \L_{2} \left(
+P_{0} \right)\) [since \(\dot{\ell}_{0} \in \L_{2} \left( Q_{0} \right)\)],
+it follows that \(\bar{\xi}_{\theta, 0} \overset{\L_{2} \left( P_{0}
+\right)}{\to} 1\) as \(|\theta| \to 0\) and hence also in \(P_{0}\)-probability.
+Furthermore, note that since \(\xi_{\theta, 0} - \bar{\xi}_{\theta, 0} = \left(
+\dot{\ell}_{0} - \dot{\ell}_{T, 0} \right)^{\prime} + \rho_{\theta, 0} -
+\bar{\rho}_{\theta, 0}\),
+\begin{equation}
+  \begin{gathered}
+    \sigma_{\theta, 0}^{2} (t) = Q_{0} \left[ \left( \xi_{\theta, 0} -
+    \bar{\xi}_{\theta, 0} \right)^{2} \middle| T = t \right] \leq
+    2 \theta^{\prime} J (t) \theta + 2 Q_{0} \left[
+    \rho_{\theta, 0}^{2} \middle| T = t \right] \\
+    \text{where} \qquad J (t) = Q_{0} \left[ \left( \dot{\ell}_{0} -
+    \dot{\ell}_{T, 0} \right) \left( \dot{\ell}_{0} - \dot{\ell}_{T, 0}
+    \right)^{\prime} \middle| T = t \right].
+  \end{gathered}
+  \label{eqn--Esigma2-bound-1}
+\end{equation}
+Since the scores are all square-integrable and \(Q_{0} \left[ \rho_{\theta,
+0}^{2} \right] \to 0\), it follows that \(\sigma_{\theta, 0}^{2} \overset{\L_{1}
+\left( P_{0} \right)}{\to} 0\) as \(|\theta| \to 0\), and hence also in
+\(P_{0}\)-probability.
+Thus, for any \(0 < \varepsilon < 1\) and \(\alpha > 0\)
+\begin{equation}
+  P_{0} \left\{ \bar{\xi}_{\theta, 0} < \varepsilon \text{ or } \sigma_{\theta,
+  0} > \alpha \right\} \to 0 \quad \text{as } |\theta| \to 0.
+  \label{eqn--Edelta2-prob-neg}
+\end{equation}
+Combine \eqref{eqn--Edelta2-bound-1}, \eqref{eqn--Esigma2-bound-1} and
+\eqref{eqn--Edelta2-prob-neg} to see that
+\begin{equation*}
+  \begin{split}
+    \frac{1}{2} P_{0} \left[ \delta_{\theta, 0}^{2} \right] \leq
+    & \, \frac{\alpha^{2}}{2 \varepsilon} |\theta|^{2} P_{0} [\|J\|] +
+    + |\theta|^{2} P_{0} \left[ \|J\| \ind \left\{ \bar{\xi}_{\theta, 0} <
+    \varepsilon \text{ or } \sigma_{\theta, 0} > \alpha \right\} \right] \\
+    & + \left( \frac{\alpha^{2}}{2 \varepsilon} + 1 \right)Q_{0} \left[
+    \rho_{\theta, 0}^{2} \right] \\
+    =
+    & \, \frac{\alpha^{2}}{2 \varepsilon} |\theta|^{2} P_{0} [\|J\|] + o \left(
+   |\theta|^{2} \right).
+  \end{split}
+\end{equation*}
+Deduce that
+\begin{equation*}
+  \limsup_{|\theta| \to 0} \frac{1}{|\theta|^{2}} P_{0} \left[ \delta_{\theta,
+  0}^{2} \right] \leq \frac{\alpha^{2}}{\varepsilon} P_{0} [\|J\|].
+\end{equation*}
+Since we can set \(\varepsilon = 1 / 2\) and choose \(\alpha \in (0, \infty)\)
+to be arbitrarily small, it follows that
+\(\limsup_{|\theta| \to 0} \frac{1}{|\theta|^{2}} P_{0} \left[ \delta_{\theta,
+  0}^{2} \right] = 0\), which implies \(P_{0} \left[ \delta_{\theta, 0}^{2}
+\right] = o \left( |\theta|^{2} \right)\) as desired.
+\end{proof}
+
+\begin{lemma}
+\label{lem--sqrt-diff-bound}
+For any \(y, x \geq 0\) and \(\alpha, \varepsilon > 0\),
+\begin{equation}
+  0 \leq \sqrt{y^{2} + x^{2}} - y \leq \frac{x^{2}}{2 \varepsilon} \cdot
+  \mathbf{1} \{y \geq \varepsilon, x \leq \alpha\} + x \cdot \mathbf{1} \{y <
+  \varepsilon \text{ or } x > \alpha\}.
+  \label{eqn--sqrt-diff-bound}
+\end{equation}
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem--sqrt-diff-bound}]
+The zero lower bound in \eqref{eqn--sqrt-diff-bound} is trivial.
+For the ``\(y < \varepsilon\) or \(x > \alpha\)'' part of the upper bound,
+note that by the \(C_{r}\)-inequality with \(r = 1 / 2\) (see for instance
+Proposition 3.8 of \citet[p. 35]{2001whiteAsymptoticTheoryEconometricians} or
+Theorem 1.2.6 of \citet[p. 12--13]{1975lukacsStochasticConvergence}),
+\(\sqrt{y^{2} + x^{2}} \leq |y| + |x|\) for all real \(x, y\) and hence, for
+\(x, y \geq 0\), \(\sqrt{y^{2} + x^{2}} - y \leq x\).
+
+For the ``\(y \geq \varepsilon\) and \(x \leq \alpha\)'' part, let \(f (x, y) =
+\sqrt{y^{2} + x^{2}} - y\).
+Then \(f (0, y) = 0\) and
+\begin{equation*}
+  \partial_{x} f (x, y) = \frac{x}{\sqrt{y ^{2} + x^{2}}} \qquad
+  \partial_{x}^{2} f (x, y) = \frac{\sqrt{y ^{2} + x^{2}} - \frac{x^{2}}{\sqrt{y
+  ^{2} + x^{2}}}}{y ^{2} + x^{2}} = \frac{y^{2}}{\left( y^{2} + x^{2} \right)^{3
+  / 2}}.
+\end{equation*}
+By a second order Taylor expansion around \(x = 0\), there exists \(\bar{x}
+= \overline{x} (y, x) \in [0, x]\) such that
+\begin{equation*}
+  f (x, y) = f (x, y) - f (0, y) = x \cdot \partial_{x} f (0, y) +
+  \frac{x^{2}}{2} \partial_{x}^{2} f \left( \bar{x}, y \right)
+  = \frac{x^{2} y^{2}}{2 \left( y^{2} + \bar{x}^{2} \right)^{3
+  / 2}} \leq \frac{x^{2}}{2 \varepsilon}.
+\end{equation*}
+Now \eqref{eqn--sqrt-diff-bound} follows from combining arguments for both
+parts.
 \end{proof}
 
 \section{Conditionals density DQM in abstract}
